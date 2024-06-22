@@ -28,3 +28,19 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x" # Use a fixed version for deployment
+      - run: npm ci
+      - run: npm run build --if-present
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.PORT }}
+          publish_dir: ./dist # Directory where your build output is located

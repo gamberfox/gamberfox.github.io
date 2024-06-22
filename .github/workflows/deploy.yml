@@ -1,34 +1,34 @@
-name: Deploy
+# name: Deploy
 
-on:
-  push:
-    branches:
-      - main # Change this to your main branch name
+# on:
+#   push:
+#     branches:
+#       - main # Change this to your main branch name
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "18"
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: "18"
 
-      - name: Install dependencies
-        run: npm install
+#       - name: Install dependencies
+#         run: npm install
 
-      - name: Build project
-        run: npm run build
+#       - name: Build project
+#         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.PORT }}
-          publish_dir: dist
-          publish_branch: gh-pages
-          user_name: GitHub Actions
-          user_email: actions@github.com
+#       - name: Deploy to GitHub Pages
+#         uses: peaceiris/actions-gh-pages@v3
+#         with:
+#           github_token: ${{ secrets.PORT }}
+#           publish_dir: dist
+#           publish_branch: gh-pages
+#           user_name: GitHub Actions
+#           user_email: actions@github.com

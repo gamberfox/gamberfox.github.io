@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base:"react-portfolio",
+  base:"./gamberfox.github.io",
   build: {
     rollupOptions: {
       external: [

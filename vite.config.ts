@@ -8,7 +8,9 @@ export default defineConfig({
     
   build: {
     outDir:'dist',
+    assetsDir: 'assets',
     rollupOptions: {
+      input:"index.html",
       external: [
         //'vue', // Exclude 'vue' from the bundle
         //'react', // Exclude 'react' from the bundle

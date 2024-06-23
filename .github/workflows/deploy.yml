@@ -27,7 +27,7 @@
 #       - name: Deploy to GitHub Pages
 #         uses: peaceiris/actions-gh-pages@v3
 #         with:
-# github_token: {{ secrets.PORT }}
+# github_token: $ {{ secrets.PORT }}
 #           publish_dir: dist
 #           publish_branch: gh-pages
 #           user_name: GitHub Actions

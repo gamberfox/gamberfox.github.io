@@ -44,5 +44,5 @@
 #       - name: Deploy to GitHub Pages
 #         uses: peaceiris/actions-gh-pages@v3
 #         with:
-#           github_token: ${{ secrets.PORT }}
+#           github_token: $ {{ secrets.PORT }}
 #           publish_dir: ./dist # Directory where your build output is located

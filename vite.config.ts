@@ -4,8 +4,10 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base:"./gamberfox.github.io",
+  base:"/gamberfox.github.io",
+    
   build: {
+    outDir:'dist',
     rollupOptions: {
       external: [
         //'vue', // Exclude 'vue' from the bundle

@@ -6,6 +6,8 @@
   "homepage": "https://<gamberfox>.github.io/<gamberfox.github.io>",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "build": "tsc && vite build --outDir docs",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",

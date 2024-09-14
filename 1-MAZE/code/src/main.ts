@@ -18,6 +18,8 @@ const map=document.getElementById('grid') as HTMLElement;
 
 const nutcrackerAudio:HTMLAudioElement = document.getElementById('nutcracker') as HTMLAudioElement;
 const joySongAudio:HTMLAudioElement = document.getElementById('joySong') as HTMLAudioElement;
+const partyHornAudio:HTMLAudioElement = document.getElementById('partyHorn') as HTMLAudioElement;
+const sadTromboneAudio:HTMLAudioElement = document.getElementById('sadTrombone') as HTMLAudioElement;
 
 
 //create map

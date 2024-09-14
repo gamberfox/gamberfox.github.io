@@ -11,8 +11,13 @@ const travelCost = { [FREE_CELL.toString()]: 1,
     [(PASSENGER).toString()]: 1,
     [(DESTINATION).toString()]: 1
 };
-const STOP_POINT = 10000;
+const STOP_POINT = 1_000_000;
 let statSheet;
+const algorithmUsed = document.getElementById('algorithmUsed');
+const expandedNodes = document.getElementById('expandedNodes');
+const nodeDepth = document.getElementById('nodeDepth');
+const computeTime = document.getElementById('computeTime');
+const solutionCost = document.getElementById('solutionCost');
 // Handle button click to perform the selected action
 solveButton.addEventListener('click', () => {
     const startTime = performance.now();
@@ -32,6 +37,7 @@ solveButton.addEventListener('click', () => {
     if (file) {
         const reader = new FileReader(); // Create a new FileReader
         statSheet = new StatSheet();
+        algorithmUsed.textContent = selectedAction;
         switch (selectedAction) {
             case 'avara':
                 // Read and display the file content
@@ -78,18 +84,28 @@ solveButton.addEventListener('click', () => {
                 case DOWN:
                     newAnswer.push(UP);
                     break;
+                default:
+                    newAnswer.push(-1);
             }
         }
         answer = newAnswer;
         statSheet.computeTime = performance.now() - startTime;
+        nodeDepth.textContent = statSheet.nodeDepth.toString();
+        expandedNodes.textContent = statSheet.expandedNodes.toString();
+        computeTime.textContent = statSheet.computeTime.toString();
         console.log('we have a new answer');
         console.log(answer);
         console.log(`expanded nodes: ${statSheet.expandedNodes}`);
         console.log(`node depth: ${statSheet.nodeDepth}`);
         console.log(`time cost: ${statSheet.computeTime} milliseconds`);
         console.log(`solution cost: ${statSheet.solutionCost}`);
-        if (newAnswer[0] === -1)
+        if (newAnswer[0] === -1) {
             console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNO ANSWER WAS FOUND, I LIED");
+            solutionCost.textContent = 'no solution was found';
+        }
+        else {
+            solutionCost.textContent = statSheet.solutionCost.toString();
+        }
         reader.onerror = () => {
             fileContent.textContent = 'Error reading file!';
         };

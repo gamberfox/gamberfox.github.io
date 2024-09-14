@@ -11,16 +11,15 @@ const depthSolver=():number[]=>{
         if(statSheet.expandedNodes>STOP_POINT) {
             console.log(`${statSheet.expandedNodes} nodes were searched,
                 the limit has been reached \n\n\n\n\n\n\n\n`);
-            let s1=new Set<number[]>();
             return [-1];
             //break;
         }
         currentNode=queue.pop() as MazePosition;
+        statSheet.nodeDepth=(currentNode.nodeDepth>statSheet.nodeDepth)?currentNode.nodeDepth:statSheet.nodeDepth;
         //we'll check if we found the answer
         if(currentNode.foundPassenger && 
             DESTINATION===mapMesh[currentNode.y][currentNode.x]){
             foundAnswer=true;
-            statSheet.nodeDepth=currentNode.nodeDepth;
             statSheet.solutionCost=currentNode.travelCost;
             console.log(`an answer was found`);
             break;
@@ -196,5 +195,7 @@ const depthSolver=():number[]=>{
         path.reverse();
         return path;
     }
-    return [-1];
+    else{
+        return [-1];
+    }
 }

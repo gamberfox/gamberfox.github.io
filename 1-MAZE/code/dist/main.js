@@ -13,6 +13,8 @@ const mapInfo = document.getElementById('mapInfo');
 const map = document.getElementById('grid');
 const nutcrackerAudio = document.getElementById('nutcracker');
 const joySongAudio = document.getElementById('joySong');
+const partyHornAudio = document.getElementById('partyHorn');
+const sadTromboneAudio = document.getElementById('sadTrombone');
 //create map
 for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {

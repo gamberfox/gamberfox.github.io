@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Reader with Dynamic Options</title>
-    <link rel="stylesheet" href="./1-MAZE/code/maze.css">
+    <link rel="stylesheet" href="../maze.css">
 </head>
 <body>
     <h1>AI project by Javier Humberto Grijalba Camayo</h1>
-    <audio id="nutcracker" src="./1-MAZE/code/sound/nutcracker.mp3"></audio>
-    <audio id="joySong" src="./1-MAZE/code/sound/joySong.mp3"></audio>
-    <audio id="partyHorn" src="./1-MAZE/code/sound/partyHorn.mp3"></audio>
-    <audio id="sadTrombone" src="./1-MAZE/code/sound/sadTrombone.mp3"></audio>
+    <!-- <h1>1743693</h1> -->
+    <audio id="nutcracker" src="../sound/nutcracker.mp3"></audio>
+    <audio id="joySong" src="../sound/joySong.mp3"></audio>
+    <audio id="partyHorn" src="../sound/partyHorn.mp3"></audio>
+    <audio id="sadTrombone" src="../sound/sadTrombone.mp3"></audio>
     <div class="panel">
         <!-- File input -->
         <input type="file" id="fileInput" />
@@ -45,9 +46,6 @@
         <div id="grid">
             <!-- Grid cells will be inserted here by JavaScript -->
         </div>
-        <!-- <div id="userGrid">
-            <h1 class="header">hello, this is a header</h1>
-        </div> -->
         <div class="table">
             <h1 class="header">solver information</h1>
             <table>
@@ -77,23 +75,26 @@
                 </tbody>
             </table>
         </div>
+        <!-- <div id="userGrid">
+            <h1 class="header">hello, this is a header</h1>
+        </div> -->
     </div>
-    <div class="info">
-        <h4 class="solutionInfo">solution info</h1>
+    <!-- <div class="info">
+        <h1 class="solutionInfo">solution info</h1>
 
-    </div>
+    </div> -->
     <pre class="invisible" id="mapInfo">
         yo this is me \n or something else
     </pre>
-    <script src="./1-MAZE/code/dist/main.js"></script>
-    <script src="./1-MAZE/code/dist/robot.js"></script>
-    <script src="./1-MAZE/code/dist/mapReader.js"></script>
-    <script src="./1-MAZE/code/dist/mapSolver.js"></script>
-    <script src="./1-MAZE/code/dist/visualizeAnswer.js"></script>
+    <script src="main.js"></script>
+    <script src="robot.js"></script>
+    <script src="mapReader.js"></script>
+    <script src="mapSolver.js"></script>
+    <script src="visualizeAnswer.js"></script>
     <!-- informed search algorithms -->
-    <script src="./1-MAZE/code/dist/breadthSolver.js"></script>
-    <script src="./1-MAZE/code/dist/uniformCostSolver.js"></script>
-    <script src="./1-MAZE/code/dist/depthAvoidingCyclesSolver.js"></script>
+    <script src="breadthSolver.js"></script>
+    <script src="uniformCostSolver.js"></script>
+    <script src="depthAvoidingCyclesSolver.js"></script>
 
     <!-- informed search algorithms -->
 </body>

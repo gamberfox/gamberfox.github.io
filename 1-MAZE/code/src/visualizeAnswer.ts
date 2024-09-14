@@ -9,12 +9,22 @@ const map2=document.getElementById('grid') as HTMLElement;
 visualizeButton.addEventListener('click',()=>{
     //robot =new Robot(0,0,5,5,100);
     //let robot =new Robot(0,0,10,10,100);
-    if(!nutcrackerAudio.paused){
-        nutcrackerAudio.pause();
-        nutcrackerAudio.currentTime = 2;
+    if(answer[0]===-1){
+        if(!sadTromboneAudio.paused){
+            sadTromboneAudio.pause();
+            sadTromboneAudio.currentTime=0;
+        }
+        sadTromboneAudio.play();
+        return;
     }
-    nutcrackerAudio.play();
-    console.log(`oioioi\n`);
-    //robot.followDirections([3,3,3,3,0]);
-    robot.followDirections(answer);
+    else{
+        if(!nutcrackerAudio.paused){
+            nutcrackerAudio.pause();
+            nutcrackerAudio.currentTime = 2;
+        }
+        nutcrackerAudio.play();
+        console.log(`oioioi\n`);
+        drawMap();//reset the map in case we're in the middle of and animation
+        robot.followDirections(answer);
+    }
 });

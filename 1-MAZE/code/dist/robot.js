@@ -109,5 +109,6 @@ class Robot {
             joySongAudio.currentTime = 1;
             joySongAudio.play();
         }
+        visualizationIsRunning = false;
     }
 }

@@ -1,8 +1,4 @@
 "use strict";
-//solveByBreadth.addEventListener('click', () => {
-//
-//mapMesh   from mapReader.ts
-//let interation=0;
 const breadthSolver = () => {
     console.log(`starting breadth solver`);
     let foundAnswer = false;
@@ -16,7 +12,6 @@ const breadthSolver = () => {
             break;
         }
         currentNode = queue.shift();
-        //we'll check if we found the answer
         if (currentNode.foundPassenger &&
             DESTINATION === mapMesh[currentNode.y][currentNode.x]) {
             foundAnswer = true;
@@ -25,8 +20,7 @@ const breadthSolver = () => {
             console.log(`an answer was found`);
             break;
         }
-        //we'll check every neighbor
-        if (WALL !== mapMesh[currentNode.y][currentNode.x + 1] //no going to walls
+        if (WALL !== mapMesh[currentNode.y][currentNode.x + 1]
             && (null === currentNode.pathToFather
                 || RIGHT !== currentNode.pathToFather
                 || currentNode.foundPassengerThisRound)) {
@@ -42,8 +36,7 @@ const breadthSolver = () => {
                 currentNode.travelCost
                     + travelCost[(mapMesh[currentNode.y][currentNode.x + 1]).toString()];
         }
-        //trying to go UP
-        if (WALL !== mapMesh[currentNode.y - 1][currentNode.x] //no going to walls
+        if (WALL !== mapMesh[currentNode.y - 1][currentNode.x]
             && (null === currentNode.pathToFather
                 || UP !== currentNode.pathToFather
                 || currentNode.foundPassengerThisRound)) {
@@ -59,8 +52,7 @@ const breadthSolver = () => {
                 currentNode.travelCost
                     + travelCost[(mapMesh[currentNode.y - 1][currentNode.x]).toString()];
         }
-        //trying to go LEFT
-        if (WALL !== mapMesh[currentNode.y][currentNode.x - 1] //no going to walls
+        if (WALL !== mapMesh[currentNode.y][currentNode.x - 1]
             && (null === currentNode.pathToFather
                 || LEFT !== currentNode.pathToFather
                 || currentNode.foundPassengerThisRound)) {
@@ -76,8 +68,7 @@ const breadthSolver = () => {
                 currentNode.travelCost
                     + travelCost[(mapMesh[currentNode.y][currentNode.x - 1]).toString()];
         }
-        //trying to go DOWN
-        if (WALL !== mapMesh[currentNode.y + 1][currentNode.x] //no going to walls
+        if (WALL !== mapMesh[currentNode.y + 1][currentNode.x]
             && (null === currentNode.pathToFather
                 || DOWN !== currentNode.pathToFather
                 || currentNode.foundPassengerThisRound)) {
@@ -94,7 +85,6 @@ const breadthSolver = () => {
                     + travelCost[(mapMesh[currentNode.y + 1][currentNode.x]).toString()];
         }
     }
-    //build answer if you found it
     if (foundAnswer) {
         let path = [];
         let node = currentNode;

@@ -11,7 +11,6 @@ const depthSolver = () => {
             console.log(`${statSheet.expandedNodes} nodes were searched,
                 the limit has been reached \n\n\n\n\n\n\n\n`);
             return [-1];
-            //break;
         }
         currentNode = queue.pop();
         statSheet.nodeDepth = (currentNode.nodeDepth > statSheet.nodeDepth) ? currentNode.nodeDepth : statSheet.nodeDepth;
@@ -26,7 +25,6 @@ const depthSolver = () => {
                 currentNode.father.upChild = null;
             }
         }
-        //we'll check if we found the answer
         if (currentNode.foundPassenger &&
             DESTINATION === mapMesh[currentNode.y][currentNode.x]) {
             foundAnswer = true;
@@ -34,13 +32,10 @@ const depthSolver = () => {
             console.log(`an answer was found`);
             break;
         }
-        //we'll check every NEIGHBOR
-        //TRYING TO GO TO THE RIGHT
-        if (WALL !== mapMesh[currentNode.y][currentNode.x + 1] //no going to walls
+        if (WALL !== mapMesh[currentNode.y][currentNode.x + 1]
             && (!currentNode.visitedNodes.has([currentNode.x + 1, currentNode.y].join(','))
                 || (!currentNode.visitedNodes2.has([currentNode.x + 1, currentNode.y].join(','))
                     && currentNode.foundPassenger))) {
-            //console.log('oi to the right');
             currentNode.rightChild = new MazePosition(currentNode.x + 1, currentNode.y, mapMesh[currentNode.y][currentNode.x + 1], currentNode.nodeDepth + 1, currentNode.foundPassenger);
             queue.push(currentNode.rightChild);
             if (PASSENGER === mapMesh[currentNode.y][currentNode.x + 1]
@@ -57,7 +52,6 @@ const depthSolver = () => {
                 = new Set([...currentNode.visitedNodes]);
             currentNode.rightChild.visitedNodes2
                 = new Set([...currentNode.visitedNodes2]);
-            //add node to one of 2 visited sets
             if (currentNode.rightChild.foundPassenger) {
                 currentNode.rightChild.visitedNodes2
                     .add([currentNode.x + 1, currentNode.y].join(','));
@@ -65,8 +59,7 @@ const depthSolver = () => {
             currentNode.rightChild.visitedNodes
                 .add([currentNode.x + 1, currentNode.y].join(','));
         }
-        //trying to go UP
-        if (WALL !== mapMesh[currentNode.y - 1][currentNode.x] //no going to walls
+        if (WALL !== mapMesh[currentNode.y - 1][currentNode.x]
             && (!currentNode.visitedNodes.has([currentNode.x, currentNode.y - 1].join(','))
                 || (!currentNode.visitedNodes2.has([currentNode.x, currentNode.y - 1].join(','))
                     && currentNode.foundPassenger))) {
@@ -86,7 +79,6 @@ const depthSolver = () => {
                 = new Set([...currentNode.visitedNodes]);
             currentNode.upChild.visitedNodes2
                 = new Set([...currentNode.visitedNodes2]);
-            //add node to one of 2 visited sets
             if (currentNode.upChild.foundPassenger) {
                 currentNode.upChild.visitedNodes2
                     .add([currentNode.x, currentNode.y - 1].join(','));
@@ -94,8 +86,7 @@ const depthSolver = () => {
             currentNode.upChild.visitedNodes
                 .add([currentNode.x, currentNode.y - 1].join(','));
         }
-        //trying to go LEFT
-        if (WALL !== mapMesh[currentNode.y][currentNode.x - 1] //no going to walls
+        if (WALL !== mapMesh[currentNode.y][currentNode.x - 1]
             && (!currentNode.visitedNodes.has([currentNode.x - 1, currentNode.y].join(','))
                 || (!currentNode.visitedNodes2.has([currentNode.x - 1, currentNode.y].join(','))
                     && currentNode.foundPassenger))) {
@@ -115,7 +106,6 @@ const depthSolver = () => {
                 = new Set([...currentNode.visitedNodes]);
             currentNode.leftChild.visitedNodes2
                 = new Set([...currentNode.visitedNodes2]);
-            //add node to one of 2 visited sets
             if (currentNode.leftChild.foundPassenger) {
                 currentNode.leftChild.visitedNodes2
                     .add([currentNode.x - 1, currentNode.y].join(','));
@@ -123,8 +113,7 @@ const depthSolver = () => {
             currentNode.leftChild.visitedNodes
                 .add([currentNode.x - 1, currentNode.y].join(','));
         }
-        //trying to go DOWN
-        if (WALL !== mapMesh[currentNode.y + 1][currentNode.x] //no going to walls
+        if (WALL !== mapMesh[currentNode.y + 1][currentNode.x]
             && (!currentNode.visitedNodes.has([currentNode.x, currentNode.y + 1].join(','))
                 || (!currentNode.visitedNodes2.has([currentNode.x, currentNode.y + 1].join(','))
                     && currentNode.foundPassenger))) {
@@ -144,7 +133,6 @@ const depthSolver = () => {
                 = new Set([...currentNode.visitedNodes]);
             currentNode.downChild.visitedNodes2
                 = new Set([...currentNode.visitedNodes2]);
-            //add node to one of 2 visited sets
             if (currentNode.downChild.foundPassenger) {
                 currentNode.downChild.visitedNodes2
                     .add([currentNode.x, currentNode.y + 1].join(','));
@@ -153,7 +141,6 @@ const depthSolver = () => {
                 .add([currentNode.x, currentNode.y + 1].join(','));
         }
     }
-    //build answer if you found it
     if (foundAnswer) {
         let path = [];
         let node = currentNode;

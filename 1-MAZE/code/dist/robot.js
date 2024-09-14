@@ -31,7 +31,6 @@ class Robot {
         }
         this.cell = map?.querySelector(`[data-x="${this.x}"][data-y="${this.y}"]`);
         this.previousCell = this.cell.className;
-        //if(this.cell.className==='cell6') alert('you won, congrats');
         if (this.previousCell === 'cell5')
             this.passengerWasFound = true;
         if (this.passengerWasFound) {
@@ -72,7 +71,6 @@ class Robot {
     }
     moveRight() {
         if (this.x < this.gridWidth - 1) {
-            //this.taxiCell.className='cell0';
             this.x += 1;
             this.updateGrid();
         }
@@ -85,10 +83,9 @@ class Robot {
     }
     async followDirections(listOfMovements) {
         console.log(`Im gonna start following directions`);
-        for (let direction of listOfMovements) { //right=0, up=1, left=2, down=3.
+        for (let direction of listOfMovements) {
             switch (direction) {
                 case 0:
-                    //setTimeout(()=> this.moveRight(),1000);
                     this.moveRight();
                     break;
                 case 1:

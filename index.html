@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="./1-MAZE/code/maze.css">
 </head>
 <body>
-    <div class="space">empty space</div>
     <audio id="nutcracker" src="./1-MAZE/code/sound/nutcracker.mp3"></audio>
     <audio id="joySong" src="./1-MAZE/code/sound/joySong.mp3"></audio>
     <audio id="partyHorn" src="./1-MAZE/code/sound/partyHorn.mp3"></audio>
@@ -47,7 +46,7 @@
     </div>
     <div class="panel">
         <!-- Button to perform the selected action -->
-         <h3 class="rules">you need to draw the map before solving it</h3>
+         <h5 class="rules">you need to draw the map before solving it</h3>
         <button id="drawButton">draw map</button>
         <button id="solveButton">solve map</button>
         <button id="visualizeButton">visualize answer</button>
@@ -106,11 +105,13 @@
     <script src="./1-MAZE/code/dist/mapReader.js"></script>
     <script src="./1-MAZE/code/dist/mapSolver.js"></script>
     <script src="./1-MAZE/code/dist/visualizeAnswer.js"></script>
+    <script src="./1-MAZE/code/dist/mapList.js"></script>
     <!-- informed search algorithms -->
     <script src="./1-MAZE/code/dist/breadthSolver.js"></script>
     <script src="./1-MAZE/code/dist/uniformCostSolver.js"></script>
     <script src="./1-MAZE/code/dist/depthAvoidingCyclesSolver.js"></script>
-    <script src="./1-MAZE/code/dist/mapList.js"></script>
     <!-- informed search algorithms -->
+    <script src="./1-MAZE/code/dist/avaraSolver.js"></script>
+    <script src="./1-MAZE/code/dist/aStarSolver.js"></script>
 </body>
 </html>

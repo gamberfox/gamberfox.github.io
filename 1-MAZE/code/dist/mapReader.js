@@ -13,11 +13,9 @@ let vehiclePosition;
 let passengerPosition;
 let destinationPosition;
 let mapMesh;
-let treeMesh; //yet to be implemented
-//this returns a mesh
+let treeMesh;
 function parseMap(text) {
     if (mapInfo !== null) {
-        //mapInfo.textContent=text; //makes that big square
         mapInfo.textContent = "I'll start parsing the map";
     }
     let rows = text.split(/\r?\n|\r/);
@@ -25,7 +23,6 @@ function parseMap(text) {
     mapRow = (Array(rows[0].split(' ').length + 2).fill(WALL));
     mapMesh = [mapRow];
     for (let line of rows) {
-        // console.log(`${line}`);
         let row = [WALL];
         for (let i of line.split(' ')) {
             row.push(parseInt(i));
@@ -47,47 +44,36 @@ const drawMap = () => {
             if (mapMesh === undefined) {
                 console.log(`hello from undefined`);
             }
-            // console.log(`${mapMesh.length}`);
-            // console.log(`${mapMesh[0].length}`);
             switch (mapMesh[y][x]) {
                 case 0:
-                    //cell.classList.add('cell0');
                     cell.className = 'cell0';
                     break;
                 case 1:
-                    //cell.classList.add('cell1');
                     cell.className = 'cell1';
                     break;
                 case 2:
-                    //cell.classList.add('cell2');
                     cell.className = 'cell2';
                     vehiclePosition = [x, y];
                     robot = new Robot(x - 1, y - 1, 10, 10, NORMAL);
                     break;
                 case 3:
-                    //cell.classList.add('cell3');
                     cell.className = 'cell3';
                     break;
                 case 4:
-                    //cell.classList.add('cell4');
                     cell.className = 'cell4';
                     break;
                 case 5:
-                    //cell.classList.add('cell5');
                     cell.className = 'cell5';
                     passengerPosition = [x, y];
                     break;
                 case 6:
-                    //cell.classList.add('cell6');
                     cell.className = 'cell6';
                     destinationPosition = [x, y];
                     break;
                 case 7:
-                    //cell.classList.add('cell7');
                     cell.className = 'cell7';
                     break;
                 default:
-                    //cell.classList.add('cell8');
                     cell.className = 'cell8';
                     console.log(`x: ${x}   y:${y} \n ${mapMesh[y][x]}`);
                     break;

@@ -1,8 +1,4 @@
 "use strict";
-//solveByBreadth.addEventListener('click', () => {
-//
-//mapMesh   from mapReader.ts
-//let interation=0;
 const uniformCostSolver = () => {
     console.log(`start uniform cost solver`);
     let foundAnswer = false;
@@ -19,7 +15,6 @@ const uniformCostSolver = () => {
         currentNode = queue.shift();
         statSheet.nodeDepth = (statSheet.nodeDepth < currentNode.nodeDepth) ?
             currentNode.nodeDepth : statSheet.nodeDepth;
-        //we'll check if we found the answer
         if (currentNode.foundPassenger &&
             DESTINATION === mapMesh[currentNode.y][currentNode.x]) {
             foundAnswer = true;
@@ -27,8 +22,7 @@ const uniformCostSolver = () => {
             console.log(`an answer was found`);
             break;
         }
-        //we'll check every neighbor
-        if (WALL !== mapMesh[currentNode.y][currentNode.x + 1] //no going to walls
+        if (WALL !== mapMesh[currentNode.y][currentNode.x + 1]
             && (null === currentNode.pathToFather
                 || RIGHT !== currentNode.pathToFather
                 || currentNode.foundPassengerThisRound)) {
@@ -40,15 +34,11 @@ const uniformCostSolver = () => {
             }
             currentNode.rightChild.father = currentNode;
             currentNode.rightChild.pathToFather = LEFT;
-            /* statSheet.nodeDepth=
-            (currentNode.rightChild.nodeDepth>statSheet.nodeDepth)?
-            currentNode.rightChild.nodeDepth : statSheet.nodeDepth; */
             currentNode.rightChild.travelCost =
                 currentNode.travelCost
                     + travelCost[(mapMesh[currentNode.y][currentNode.x + 1]).toString()];
         }
-        //trying to go UP
-        if (WALL !== mapMesh[currentNode.y - 1][currentNode.x] //no going to walls
+        if (WALL !== mapMesh[currentNode.y - 1][currentNode.x]
             && (null === currentNode.pathToFather
                 || UP !== currentNode.pathToFather
                 || currentNode.foundPassengerThisRound)) {
@@ -60,15 +50,11 @@ const uniformCostSolver = () => {
             }
             currentNode.upChild.father = currentNode;
             currentNode.upChild.pathToFather = DOWN;
-            /* statSheet.nodeDepth=
-            (currentNode.upChild.nodeDepth>statSheet.nodeDepth)?
-            currentNode.upChild.nodeDepth : statSheet.nodeDepth; */
             currentNode.upChild.travelCost =
                 currentNode.travelCost
                     + travelCost[(mapMesh[currentNode.y - 1][currentNode.x]).toString()];
         }
-        //trying to go LEFT
-        if (WALL !== mapMesh[currentNode.y][currentNode.x - 1] //no going to walls
+        if (WALL !== mapMesh[currentNode.y][currentNode.x - 1]
             && (null === currentNode.pathToFather
                 || LEFT !== currentNode.pathToFather
                 || currentNode.foundPassengerThisRound)) {
@@ -80,16 +66,11 @@ const uniformCostSolver = () => {
             }
             currentNode.leftChild.father = currentNode;
             currentNode.leftChild.pathToFather = RIGHT;
-            /* statSheet.nodeDepth=
-            (currentNode.leftChild.nodeDepth>statSheet.nodeDepth)?
-            currentNode.leftChild.nodeDepth : statSheet.nodeDepth;
- */
             currentNode.leftChild.travelCost =
                 currentNode.travelCost
                     + travelCost[(mapMesh[currentNode.y][currentNode.x - 1]).toString()];
         }
-        //trying to go DOWN
-        if (WALL !== mapMesh[currentNode.y + 1][currentNode.x] //no going to walls
+        if (WALL !== mapMesh[currentNode.y + 1][currentNode.x]
             && (null === currentNode.pathToFather
                 || DOWN !== currentNode.pathToFather
                 || currentNode.foundPassengerThisRound)) {
@@ -101,16 +82,11 @@ const uniformCostSolver = () => {
             }
             currentNode.downChild.father = currentNode;
             currentNode.downChild.pathToFather = UP;
-            /* statSheet.nodeDepth=
-            (currentNode.downChild.nodeDepth>statSheet.nodeDepth)?
-            currentNode.downChild.nodeDepth : statSheet.nodeDepth;
- */
             currentNode.downChild.travelCost =
                 currentNode.travelCost
                     + travelCost[(mapMesh[currentNode.y + 1][currentNode.x]).toString()];
         }
     }
-    //build answer if you found it
     if (foundAnswer) {
         let path = [];
         let node = currentNode;

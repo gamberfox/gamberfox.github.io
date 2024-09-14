@@ -18,11 +18,10 @@ const expandedNodes = document.getElementById('expandedNodes');
 const nodeDepth = document.getElementById('nodeDepth');
 const computeTime = document.getElementById('computeTime');
 const solutionCost = document.getElementById('solutionCost');
-// Handle button click to perform the selected action
 solveButton.addEventListener('click', () => {
     const startTime = performance.now();
-    const selectedAction = actionSelect.value; // Get the selected action
-    const file = fileInput.files?.[0]; // Get the selected file
+    const selectedAction = actionSelect.value;
+    const file = fileInput.files?.[0];
     nutcrackerAudio.currentTime = 2;
     if (!nutcrackerAudio.paused) {
         nutcrackerAudio.pause();
@@ -33,27 +32,19 @@ solveButton.addEventListener('click', () => {
         joySongAudio.currentTime = 1;
     }
     if (file || mapListWasSelected) {
-        const reader = new FileReader(); // Create a new FileReader
+        const reader = new FileReader();
         statSheet = new StatSheet();
         algorithmUsed.textContent = selectedAction;
         switch (selectedAction) {
             case 'avara':
-                // Read and display the file content
-                /* reader.onload = (e) => {
-                    fileContent.textContent = e.target?.result as string; // Display the file content
-                }; */
-                //reader.readAsText(file); // changes the bottom text
                 break;
             case 'aStar':
-                // Display the file size in bytes
-                //fileContent.textContent = `File Size: ${file.size} bytes`;
                 break;
             case 'breadth':
                 answer = breadthSolver();
                 console.log(`breadth case`);
                 break;
             case 'uniformCost':
-                //reader.readAsDataURL(file); // Read the file as a data URL (for image preview)
                 answer = uniformCostSolver();
                 console.log(`the uniform cost algoritm was used`);
                 break;
@@ -122,8 +113,6 @@ class MazePosition {
     y;
     cellType;
     nodeDepth;
-    //pos0=y,pos1=x,pos2=x+y.
-    //radarDistance:number;
     lDistance = 0;
     travelCost = 0;
     visited = false;
@@ -134,7 +123,6 @@ class MazePosition {
     father = null;
     pathToFather = null;
     pathHome = [];
-    //the taxi can go to a maximum of 4 directions
     rightChild = null;
     upChild = null;
     leftChild = null;
@@ -145,7 +133,6 @@ class MazePosition {
         this.cellType = cellType;
         this.nodeDepth = nodeDepth;
         this.foundPassenger = foundPassenger;
-        //this.radarDistance=[posX,posY,0];
     }
 }
 class StatSheet {

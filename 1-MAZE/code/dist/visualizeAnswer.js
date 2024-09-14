@@ -1,9 +1,6 @@
 "use strict";
 let visualizationIsRunning = false;
-//const mapUser=document.getElementById('grid') as HTMLElement;
 visualizeButton.addEventListener('click', () => {
-    //robot =new Robot(0,0,5,5,100);
-    //let robot =new Robot(0,0,10,10,100);
     if (visualizationIsRunning)
         return;
     else {
@@ -26,7 +23,7 @@ visualizeButton.addEventListener('click', () => {
         }
         nutcrackerAudio.play();
         console.log(`oioioi\n`);
-        drawMap(); //reset the map in case we're in the middle of and animation
+        drawMap();
         robot.followDirections(answer);
     }
 });

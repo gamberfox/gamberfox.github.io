@@ -110,5 +110,6 @@ class Robot {
             joySongAudio.play();
         }
         visualizationIsRunning = false;
+        visualizeButton.disabled = false;
     }
 }

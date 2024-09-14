@@ -10,7 +10,7 @@ const breadthSolver = () => {
     let queue = [currentNode];
     while (queue.length > 0) {
         statSheet.expandedNodes += 1;
-        if (statSheet.expandedNodes > (STOP_POINT / 1)) {
+        if (statSheet.expandedNodes > (STOP_POINT)) {
             console.log(`${statSheet.expandedNodes} nodes were searched,
                 the limit has been reached`);
             break;

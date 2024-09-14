@@ -8,6 +8,7 @@ visualizeButton.addEventListener('click', () => {
         return;
     else {
         visualizationIsRunning = true;
+        visualizeButton.disabled = true;
     }
     if (answer[0] === -1) {
         if (!sadTromboneAudio.paused) {

@@ -93,18 +93,23 @@ solveButton.addEventListener('click', () => {
         nodeDepth.textContent = statSheet.nodeDepth.toString();
         expandedNodes.textContent = statSheet.expandedNodes.toString();
         computeTime.textContent = statSheet.computeTime.toString();
-        console.log('we have a new answer');
         console.log(answer);
-        console.log(`expanded nodes: ${statSheet.expandedNodes}`);
-        console.log(`node depth: ${statSheet.nodeDepth}`);
-        console.log(`time cost: ${statSheet.computeTime} milliseconds`);
-        console.log(`solution cost: ${statSheet.solutionCost}`);
         if (newAnswer[0] === -1) {
             console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNO ANSWER WAS FOUND, I LIED");
             solutionCost.textContent = 'no solution was found';
+            if (!sadTromboneAudio.paused) {
+                sadTromboneAudio.pause();
+                sadTromboneAudio.currentTime = 0;
+            }
+            sadTromboneAudio.play();
         }
         else {
             solutionCost.textContent = statSheet.solutionCost.toString();
+            if (!partyHornAudio.paused) {
+                partyHornAudio.pause();
+                partyHornAudio.currentTime = 0;
+            }
+            partyHornAudio.play();
         }
         reader.onerror = () => {
             fileContent.textContent = 'Error reading file!';

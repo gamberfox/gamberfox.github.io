@@ -25,7 +25,6 @@ solveButton.addEventListener('click', () => {
     const startTime:number = performance.now();
     const selectedAction = actionSelect.value; // Get the selected action
     const file = fileInput.files?.[0]; // Get the selected file
-    console.log(`here`);
     nutcrackerAudio.currentTime = 2;
     if(!nutcrackerAudio.paused){
         nutcrackerAudio.pause();

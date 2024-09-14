@@ -16,6 +16,18 @@ const depthSolver=():number[]=>{
         }
         currentNode=queue.pop() as MazePosition;
         statSheet.nodeDepth=(currentNode.nodeDepth>statSheet.nodeDepth)?currentNode.nodeDepth:statSheet.nodeDepth;
+
+        if(currentNode.father!==null){
+            if(currentNode.pathToFather===RIGHT){
+                currentNode.father.downChild=null;
+            }
+            if(currentNode.pathToFather===DOWN){
+                currentNode.father.leftChild=null;
+            }
+            if(currentNode.pathToFather===LEFT){
+                currentNode.father.upChild=null;
+            }
+        }
         //we'll check if we found the answer
         if(currentNode.foundPassenger && 
             DESTINATION===mapMesh[currentNode.y][currentNode.x]){
@@ -25,7 +37,7 @@ const depthSolver=():number[]=>{
             break;
         }
 
-        //we'll check every neighbor
+        //we'll check every NEIGHBOR
         //TRYING TO GO TO THE RIGHT
         if(WALL!==mapMesh[currentNode.y][currentNode.x+1]//no going to walls
             && (!currentNode.visitedNodes.has([currentNode.x+1,currentNode.y].join(','))

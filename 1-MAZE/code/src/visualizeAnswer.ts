@@ -5,7 +5,7 @@
 
 //
 
-const map2=document.getElementById('grid') as HTMLElement;
+//const mapUser=document.getElementById('grid') as HTMLElement;
 visualizeButton.addEventListener('click',()=>{
     //robot =new Robot(0,0,5,5,100);
     //let robot =new Robot(0,0,10,10,100);
@@ -18,8 +18,9 @@ visualizeButton.addEventListener('click',()=>{
         return;
     }
     else{
-        if(!nutcrackerAudio.paused){
+        if(!nutcrackerAudio.paused || !joySongAudio.paused){
             nutcrackerAudio.pause();
+            joySongAudio.pause()
             nutcrackerAudio.currentTime = 2;
         }
         nutcrackerAudio.play();

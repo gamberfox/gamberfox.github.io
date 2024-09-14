@@ -7,14 +7,29 @@
     <link rel="stylesheet" href="./1-MAZE/code/maze.css">
 </head>
 <body>
-    <h1>AI project by Javier Humberto Grijalba Camayo</h1>
+    <div class="space">empty space</div>
     <audio id="nutcracker" src="./1-MAZE/code/sound/nutcracker.mp3"></audio>
     <audio id="joySong" src="./1-MAZE/code/sound/joySong.mp3"></audio>
     <audio id="partyHorn" src="./1-MAZE/code/sound/partyHorn.mp3"></audio>
     <audio id="sadTrombone" src="./1-MAZE/code/sound/sadTrombone.mp3"></audio>
+    <div class="top">
+        <h1>AI project by Javier Humberto Grijalba Camayo</h1>
+    </div>
     <div class="panel">
         <!-- File input -->
         <input type="file" id="fileInput" />
+
+        <label for="mapList">choose a map:</label>
+        <select id="mapList">
+            <option value="map1">map 1</option>
+            <option value="map2">map 2</option>
+            <option value="map3">map 3(deep depth)</option>
+            <option value="map4">map 3(deep depth)</option>
+            <option value="map5">map 3(deep depth)</option>
+        </select>
+
+    </div>
+    <div class="panel">
 
         <!-- First panel: Select file type category -->
         <label for="fileCategory">choose search algorithm type:</label>
@@ -94,7 +109,7 @@
     <script src="./1-MAZE/code/dist/breadthSolver.js"></script>
     <script src="./1-MAZE/code/dist/uniformCostSolver.js"></script>
     <script src="./1-MAZE/code/dist/depthAvoidingCyclesSolver.js"></script>
-
+    <script src="./1-MAZE/code/dist/mapList.js"></script>
     <!-- informed search algorithms -->
 </body>
 </html>

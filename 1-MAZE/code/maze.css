@@ -1,11 +1,22 @@
+  
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     padding: 10px;
     flex-direction: column;
     font-family: Arial, sans-serif;
+    overflow: auto;
+    font-size: 30px;
+}
+h1{
+    padding: 30px;
+}
+
+button{
+    padding: 20px;
+    border-radius: 5px;
 }
 .mazeContainer {
     display: grid; /* Enables Grid layout */

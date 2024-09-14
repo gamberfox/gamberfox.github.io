@@ -35,8 +35,7 @@ solveButton.addEventListener('click', () => {
         joySongAudio.pause();
         joySongAudio.currentTime=1;
     }
-    //nutcrackerAudio.play();
-    if (file) {
+    if (file || mapListWasSelected) {
         const reader = new FileReader(); // Create a new FileReader
         statSheet=new StatSheet();
         algorithmUsed.textContent=selectedAction;
@@ -51,7 +50,7 @@ solveButton.addEventListener('click', () => {
 
             case 'aStar':
                 // Display the file size in bytes
-                fileContent.textContent = `File Size: ${file.size} bytes`;
+                //fileContent.textContent = `File Size: ${file.size} bytes`;
                 break;
 
             case 'breadth':
@@ -60,7 +59,7 @@ solveButton.addEventListener('click', () => {
                 break;
 
             case 'uniformCost':
-                reader.readAsDataURL(file); // Read the file as a data URL (for image preview)
+                //reader.readAsDataURL(file); // Read the file as a data URL (for image preview)
                 answer=uniformCostSolver();
                 console.log(`the uniform cost algoritm was used`);
                 break;

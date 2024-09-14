@@ -76,19 +76,26 @@ fileCategorySelect.addEventListener('change', (event) => {
     updateActionOptions(selectedCategory);
 });
 
+fileInput.addEventListener('click',()=>{
+    mapListWasSelected=false;
+});
+
 drawButton.addEventListener('click',()=>{
     const selectedAction = actionSelect.value; // Get the selected action
     const file = fileInput.files?.[0]; // Get the selected file
     console.log(`here in the drawButton`);
-    
-    if(file){
+    if(!joySongAudio.paused){
+        joySongAudio.pause();
+        joySongAudio.currentTime=1;
+    }
+    if(mapListWasSelected){
+        mapMesh=mapList[mapSelect.value];
+        drawMap();
+    }
+    else if(file){
         const reader = new FileReader();
         reader.onload = (e) => {
             //fileContent.textContent = e.target?.result as string; // Display the file content
-            if(!joySongAudio.paused){
-                joySongAudio.pause();
-                joySongAudio.currentTime=1;
-            }
             parseMap(e.target?.result as string);
             drawMap();
         };

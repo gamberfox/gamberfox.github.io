@@ -18,6 +18,7 @@ const algorithmUsed = document.getElementById('algorithmUsed') as HTMLElement;
 const expandedNodes = document.getElementById('expandedNodes') as HTMLElement;
 const exploredNodes = document.getElementById('exploredNodes') as HTMLElement;
 const nodeDepth = document.getElementById('nodeDepth') as HTMLElement;
+const answerNodeDepth = document.getElementById('answerNodeDepth') as HTMLElement;
 const computeTime = document.getElementById('computeTime') as HTMLElement;
 const solutionCost = document.getElementById('solutionCost') as HTMLElement;
 
@@ -95,6 +96,7 @@ solveButton.addEventListener('click', () => {
         answer=newAnswer;
         statSheet.computeTime=performance.now()- startTime;
         nodeDepth.textContent=statSheet.nodeDepth.toString();
+        answerNodeDepth.textContent=statSheet.answerNodeDepth.toString();
         expandedNodes.textContent=statSheet.expandedNodes.toString();
         exploredNodes.textContent=statSheet.exploredNodes.toString();
         computeTime.textContent=statSheet.computeTime.toString();
@@ -163,6 +165,7 @@ class StatSheet{
     expandedNodes:number=0;
     exploredNodes:number=1;
     nodeDepth:number=0;
+    answerNodeDepth:number=0;
     computeTime:number=0;
     solutionCost:number=0;
 }

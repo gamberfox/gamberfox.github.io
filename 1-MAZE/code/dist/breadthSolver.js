@@ -17,6 +17,7 @@ const breadthSolver = () => {
             foundAnswer = true;
             statSheet.nodeDepth = currentNode.nodeDepth;
             statSheet.solutionCost = currentNode.travelCost;
+            statSheet.answerNodeDepth = currentNode.nodeDepth;
             console.log(`an answer was found`);
             break;
         }

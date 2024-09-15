@@ -33,6 +33,7 @@ const depthSolver=():number[]=>{
             DESTINATION===mapMesh[currentNode.y][currentNode.x]){
             foundAnswer=true;
             statSheet.solutionCost=currentNode.travelCost;
+            statSheet.answerNodeDepth=currentNode.nodeDepth;
             console.log(`an answer was found`);
             break;
         }

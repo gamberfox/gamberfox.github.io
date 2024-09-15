@@ -11,7 +11,7 @@ body {
     font-size: 20px;
 }
 h1{
-    padding: 30px;
+    padding: 10px;
 }
 
 button{
@@ -33,6 +33,7 @@ button{
     padding: 10px;
     border: 2px solid;
     border-color: blueviolet;
+    margin:5px;
 }
 #grid {
     display: grid;

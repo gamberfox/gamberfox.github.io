@@ -12,7 +12,7 @@ const travelCost:{[key: string]:number}={[FREE_CELL.toString()]:1,
     [(DESTINATION).toString()]:1
 };
 
-const STOP_POINT=1_000_000;
+const STOP_POINT=100_000;
 let statSheet:StatSheet;
 const algorithmUsed = document.getElementById('algorithmUsed') as HTMLElement;
 const expandedNodes = document.getElementById('expandedNodes') as HTMLElement;

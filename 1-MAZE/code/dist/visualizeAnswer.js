@@ -24,6 +24,7 @@ visualizeButton.addEventListener('click', () => {
         nutcrackerAudio.play();
         console.log(`oioioi\n`);
         drawMap();
+        robot.difficulty = parseInt(vehicleSpeedSelect.value);
         robot.followDirections(answer);
     }
 });

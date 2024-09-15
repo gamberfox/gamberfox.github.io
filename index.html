@@ -27,9 +27,15 @@
             <option value="map5">map 5 03breadth.txt</option>
             <option value="map6">empty Map</option>
         </select>
+        <label for="vehicleSpeed">choose the vehicle speed:</label>
+        <select id="vehicleSpeed">
+            <!-- Default options, will be updated dynamically -->
+            <option value="100">fast</option>
+            <option value="500">normal</option>
+            <option value="1000">slow</option>
+        </select>
     </div>
     <div class="panel">
-
         <!-- First panel: Select file type category -->
         <label for="fileCategory">choose search algorithm type:</label>
         <select id="fileCategory">
@@ -46,10 +52,10 @@
     </div>
     <div class="panel">
         <!-- Button to perform the selected action -->
-         <h5 class="rules">you need to draw the map before solving it</h3>
-        <button id="drawButton">draw map</button>
-        <button id="solveButton">solve map</button>
-        <button id="visualizeButton">visualize answer</button>
+         <span class="warning">you need to draw the map before solving it</span>
+             <button id="drawButton">draw map</button>
+             <button id="solveButton">solve map</button>
+             <button id="visualizeButton">visualize answer</button>
     </div>
 
     <!-- Second panel: Select action (this will change based on the first panel) -->
@@ -106,6 +112,7 @@
     <script src="./1-MAZE/code/dist/mapSolver.js"></script>
     <script src="./1-MAZE/code/dist/visualizeAnswer.js"></script>
     <script src="./1-MAZE/code/dist/mapList.js"></script>
+    <script src="./1-MAZE/code/dist/settings.js"></script>
     <!-- informed search algorithms -->
     <script src="./1-MAZE/code/dist/breadthSolver.js"></script>
     <script src="./1-MAZE/code/dist/uniformCostSolver.js"></script>

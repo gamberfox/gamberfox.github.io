@@ -15,6 +15,7 @@ const STOP_POINT = 100_000;
 let statSheet;
 const algorithmUsed = document.getElementById('algorithmUsed');
 const expandedNodes = document.getElementById('expandedNodes');
+const exploredNodes = document.getElementById('exploredNodes');
 const nodeDepth = document.getElementById('nodeDepth');
 const computeTime = document.getElementById('computeTime');
 const solutionCost = document.getElementById('solutionCost');
@@ -81,6 +82,7 @@ solveButton.addEventListener('click', () => {
         statSheet.computeTime = performance.now() - startTime;
         nodeDepth.textContent = statSheet.nodeDepth.toString();
         expandedNodes.textContent = statSheet.expandedNodes.toString();
+        exploredNodes.textContent = statSheet.exploredNodes.toString();
         computeTime.textContent = statSheet.computeTime.toString();
         console.log(answer);
         if (newAnswer[0] === -1) {
@@ -137,6 +139,7 @@ class MazePosition {
 }
 class StatSheet {
     expandedNodes = 0;
+    exploredNodes = 1;
     nodeDepth = 0;
     computeTime = 0;
     solutionCost = 0;

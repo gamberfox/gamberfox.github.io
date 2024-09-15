@@ -33,6 +33,7 @@ const breadthSolver=():number[]=>{
             || RIGHT!==currentNode.pathToFather
         || currentNode.foundPassengerThisRound)
         ){
+            statSheet.exploredNodes+=1;
             currentNode.rightChild=new MazePosition(currentNode.x+1,currentNode.y,
                 mapMesh[currentNode.y][currentNode.x+1],
                 currentNode.nodeDepth+1,currentNode.foundPassenger
@@ -56,6 +57,7 @@ const breadthSolver=():number[]=>{
             && (null===currentNode.pathToFather
             || UP!==currentNode.pathToFather
             || currentNode.foundPassengerThisRound)){
+            statSheet.exploredNodes+=1;
             currentNode.upChild=new MazePosition(currentNode.x,currentNode.y-1,
                 mapMesh[currentNode.y-1][currentNode.x],
                     currentNode.nodeDepth+1,currentNode.foundPassenger
@@ -78,6 +80,7 @@ const breadthSolver=():number[]=>{
             && (null===currentNode.pathToFather
                 || LEFT!==currentNode.pathToFather
                 || currentNode.foundPassengerThisRound)){
+            statSheet.exploredNodes+=1;
             currentNode.leftChild=new MazePosition(currentNode.x-1,currentNode.y,
                 mapMesh[currentNode.y][currentNode.x-1],
                 currentNode.nodeDepth+1,currentNode.foundPassenger
@@ -99,7 +102,8 @@ const breadthSolver=():number[]=>{
         if(WALL!==mapMesh[currentNode.y+1][currentNode.x]//no going to walls
             && (null===currentNode.pathToFather
                 || DOWN!==currentNode.pathToFather
-                || currentNode.foundPassengerThisRound)){
+                || currentNode.foundPassengerThisRound)){                    
+                    statSheet.exploredNodes+=1;
             currentNode.downChild=new MazePosition(currentNode.x,currentNode.y+1,
                 mapMesh[currentNode.y+1][currentNode.x],
                 currentNode.nodeDepth+1,currentNode.foundPassenger

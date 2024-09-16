@@ -17,6 +17,8 @@ visualizeButton.addEventListener('click',()=>{
             sadTromboneAudio.currentTime=0;
         }
         sadTromboneAudio.play();
+        visualizationIsRunning=false;
+        visualizeButton.disabled=false;
         return;
     }
     else{

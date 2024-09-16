@@ -97,6 +97,9 @@ class Robot {
                 case 3:
                     this.moveDown();
                     break;
+                default:
+                    console.log('there is no answer');
+                    break;
             }
             await this.delay(this.difficulty);
         }

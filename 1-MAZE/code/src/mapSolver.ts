@@ -1,5 +1,5 @@
 
-let answer:number[]=[-33];
+let answer:number[]=[-1];
 const RIGHT:number=0;
 const UP:number=1;
 const LEFT:number=2;
@@ -136,7 +136,7 @@ class MazePosition{
     nodeDepth:number;
     //pos0=y,pos1=x,pos2=x+y.
     //radarDistance:number;
-    lDistance:number=0;
+    heuristic:number=0;
     travelCost:number=0;
     visited:boolean=false;
     visitedNodes:Set<string>=new Set();

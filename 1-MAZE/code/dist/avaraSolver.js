@@ -5,13 +5,13 @@ const avaraSolver = () => {
     let currentNode = new MazePosition(vehiclePosition[0], vehiclePosition[1], VEHICLE, 0, false);
     let queue = [currentNode];
     while (queue.length > 0) {
-        if (statSheet.expandedNodes > (STOP_POINT)) {
+        if (statSheet.expandedNodes > (STOP_POINT / 10)) {
             console.log(`${statSheet.expandedNodes} nodes were searched,
                 the limit has been reached`);
             break;
         }
         statSheet.expandedNodes += 1;
-        queue.sort((a, b) => a.travelCost - b.travelCost);
+        queue.sort((a, b) => a.heuristic - b.heuristic);
         currentNode = queue.shift();
         statSheet.nodeDepth = (statSheet.nodeDepth < currentNode.nodeDepth) ?
             currentNode.nodeDepth : statSheet.nodeDepth;
@@ -40,6 +40,14 @@ const avaraSolver = () => {
             currentNode.rightChild.travelCost =
                 currentNode.travelCost
                     + travelCost[(mapMesh[currentNode.y][currentNode.x + 1]).toString()];
+            if (!currentNode.rightChild.foundPassenger) {
+                currentNode.rightChild.heuristic =
+                    Math.abs(passengerPosition[0] - currentNode.rightChild.x)
+                        + Math.abs(passengerPosition[1] - currentNode.rightChild.y);
+            }
+            currentNode.rightChild.heuristic +=
+                Math.abs(destinationPosition[0] - currentNode.rightChild.x)
+                    + Math.abs(destinationPosition[1] - currentNode.rightChild.y);
         }
         if (WALL !== mapMesh[currentNode.y - 1][currentNode.x]
             && (null === currentNode.pathToFather
@@ -57,6 +65,14 @@ const avaraSolver = () => {
             currentNode.upChild.travelCost =
                 currentNode.travelCost
                     + travelCost[(mapMesh[currentNode.y - 1][currentNode.x]).toString()];
+            if (!currentNode.upChild.foundPassenger) {
+                currentNode.upChild.heuristic =
+                    Math.abs(passengerPosition[0] - currentNode.upChild.x)
+                        + Math.abs(passengerPosition[1] - currentNode.upChild.y);
+            }
+            currentNode.upChild.heuristic +=
+                Math.abs(destinationPosition[0] - currentNode.upChild.x)
+                    + Math.abs(destinationPosition[1] - currentNode.upChild.y);
         }
         if (WALL !== mapMesh[currentNode.y][currentNode.x - 1]
             && (null === currentNode.pathToFather
@@ -74,6 +90,14 @@ const avaraSolver = () => {
             currentNode.leftChild.travelCost =
                 currentNode.travelCost
                     + travelCost[(mapMesh[currentNode.y][currentNode.x - 1]).toString()];
+            if (!currentNode.leftChild.foundPassenger) {
+                currentNode.leftChild.heuristic =
+                    Math.abs(passengerPosition[0] - currentNode.leftChild.x)
+                        + Math.abs(passengerPosition[1] - currentNode.leftChild.y);
+            }
+            currentNode.leftChild.heuristic +=
+                Math.abs(destinationPosition[0] - currentNode.leftChild.x)
+                    + Math.abs(destinationPosition[1] - currentNode.leftChild.y);
         }
         if (WALL !== mapMesh[currentNode.y + 1][currentNode.x]
             && (null === currentNode.pathToFather
@@ -91,8 +115,17 @@ const avaraSolver = () => {
             currentNode.downChild.travelCost =
                 currentNode.travelCost
                     + travelCost[(mapMesh[currentNode.y + 1][currentNode.x]).toString()];
+            if (!currentNode.downChild.foundPassenger) {
+                currentNode.downChild.heuristic =
+                    Math.abs(passengerPosition[0] - currentNode.downChild.x)
+                        + Math.abs(passengerPosition[1] - currentNode.downChild.y);
+            }
+            currentNode.downChild.heuristic +=
+                Math.abs(destinationPosition[0] - currentNode.downChild.x)
+                    + Math.abs(destinationPosition[1] - currentNode.downChild.y);
         }
     }
+    statSheet.listLength = queue.length;
     if (foundAnswer) {
         let path = [];
         let node = currentNode;

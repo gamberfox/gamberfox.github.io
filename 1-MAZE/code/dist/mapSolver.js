@@ -1,5 +1,5 @@
 "use strict";
-let answer = [-33];
+let answer = [-1];
 const RIGHT = 0;
 const UP = 1;
 const LEFT = 2;
@@ -40,8 +40,11 @@ solveButton.addEventListener('click', () => {
         algorithmUsed.textContent = selectedAction;
         switch (selectedAction) {
             case 'avara':
+                answer = avaraSolver();
+                console.log(`the avara algorithm was used`);
                 break;
             case 'aStar':
+                console.log(`the a star algorithm was used`);
                 break;
             case 'breadth':
                 answer = breadthSolver();
@@ -118,7 +121,7 @@ class MazePosition {
     y;
     cellType;
     nodeDepth;
-    lDistance = 0;
+    heuristic = 0;
     travelCost = 0;
     visited = false;
     visitedNodes = new Set();

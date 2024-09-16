@@ -25,6 +25,8 @@ const avaraSolver=():number[]=>{
             DESTINATION===mapMesh[currentNode.y][currentNode.x]){
             foundAnswer=true;
             statSheet.solutionCost=currentNode.travelCost;
+            statSheet.answerNodeDepth=currentNode.nodeDepth;
+            statSheet.listLength=queue.length;
             console.log(`an answer was found`);
             break;
         }
@@ -35,6 +37,7 @@ const avaraSolver=():number[]=>{
             || RIGHT!==currentNode.pathToFather
         || currentNode.foundPassengerThisRound)
         ){
+            statSheet.exploredNodes+=1;
             currentNode.rightChild=new MazePosition(currentNode.x+1,currentNode.y,
                 mapMesh[currentNode.y][currentNode.x+1],
                 currentNode.nodeDepth+1,currentNode.foundPassenger
@@ -61,6 +64,7 @@ const avaraSolver=():number[]=>{
             && (null===currentNode.pathToFather
             || UP!==currentNode.pathToFather
             || currentNode.foundPassengerThisRound)){
+                statSheet.exploredNodes+=1;
             currentNode.upChild=new MazePosition(currentNode.x,currentNode.y-1,
                 mapMesh[currentNode.y-1][currentNode.x],
                     currentNode.nodeDepth+1,currentNode.foundPassenger
@@ -86,6 +90,7 @@ const avaraSolver=():number[]=>{
             && (null===currentNode.pathToFather
                 || LEFT!==currentNode.pathToFather
                 || currentNode.foundPassengerThisRound)){
+                    statSheet.exploredNodes+=1;
             currentNode.leftChild=new MazePosition(currentNode.x-1,currentNode.y,
                 mapMesh[currentNode.y][currentNode.x-1],
                 currentNode.nodeDepth+1,currentNode.foundPassenger
@@ -111,6 +116,7 @@ const avaraSolver=():number[]=>{
             && (null===currentNode.pathToFather
                 || DOWN!==currentNode.pathToFather
                 || currentNode.foundPassengerThisRound)){
+                    statSheet.exploredNodes+=1;
             currentNode.downChild=new MazePosition(currentNode.x,currentNode.y+1,
                 mapMesh[currentNode.y+1][currentNode.x],
                 currentNode.nodeDepth+1,currentNode.foundPassenger

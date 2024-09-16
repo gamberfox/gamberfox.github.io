@@ -5,6 +5,7 @@ const depthSolver=():number[]=>{
     let foundAnswer:boolean=false;
     let currentNode:MazePosition=new MazePosition(vehiclePosition[0],vehiclePosition[1],VEHICLE,0,false);
     currentNode.visitedNodes.add([vehiclePosition[0],vehiclePosition[1]].join(','));
+    //this is actually a stack
     let queue:MazePosition[]=[currentNode];
     while(queue.length>0){
         statSheet.expandedNodes+=1;
@@ -34,6 +35,7 @@ const depthSolver=():number[]=>{
             foundAnswer=true;
             statSheet.solutionCost=currentNode.travelCost;
             statSheet.answerNodeDepth=currentNode.nodeDepth;
+            statSheet.listLength=queue.length;
             console.log(`an answer was found`);
             break;
         }

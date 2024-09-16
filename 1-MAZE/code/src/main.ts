@@ -90,7 +90,6 @@ drawButton.addEventListener('click',()=>{
     }
     if(mapListWasSelected){
         mapMesh=mapList[mapSelect.value];
-        console.log('\n\n\n\n\nselected map is:   '+mapSelect.value);
         drawMap();
     }
     else if(file){

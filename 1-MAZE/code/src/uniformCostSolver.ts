@@ -26,6 +26,7 @@ const uniformCostSolver=():number[]=>{
             foundAnswer=true;
             statSheet.solutionCost=currentNode.travelCost;
             statSheet.answerNodeDepth=currentNode.nodeDepth;
+            statSheet.listLength=queue.length;
             console.log(`an answer was found`);
             break;
         }

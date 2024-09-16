@@ -18,6 +18,7 @@ const expandedNodes = document.getElementById('expandedNodes');
 const exploredNodes = document.getElementById('exploredNodes');
 const nodeDepth = document.getElementById('nodeDepth');
 const answerNodeDepth = document.getElementById('answerNodeDepth');
+const listLength = document.getElementById('listLength');
 const computeTime = document.getElementById('computeTime');
 const solutionCost = document.getElementById('solutionCost');
 solveButton.addEventListener('click', () => {
@@ -58,7 +59,7 @@ solveButton.addEventListener('click', () => {
                 fileContent.textContent = 'Please select a valid action.';
                 break;
         }
-        console.log('solveButton listener');
+        console.log('------solveButton listener: this is the answer path reversed');
         console.log(`${answer}`);
         let newAnswer = [];
         for (let direction of answer) {
@@ -83,10 +84,10 @@ solveButton.addEventListener('click', () => {
         statSheet.computeTime = performance.now() - startTime;
         nodeDepth.textContent = statSheet.nodeDepth.toString();
         answerNodeDepth.textContent = statSheet.answerNodeDepth.toString();
+        listLength.textContent = statSheet.listLength.toString();
         expandedNodes.textContent = statSheet.expandedNodes.toString();
         exploredNodes.textContent = statSheet.exploredNodes.toString();
         computeTime.textContent = statSheet.computeTime.toString();
-        console.log(answer);
         if (newAnswer[0] === -1) {
             console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNO ANSWER WAS FOUND, I LIED");
             solutionCost.textContent = 'no solution was found';
@@ -144,6 +145,7 @@ class StatSheet {
     exploredNodes = 1;
     nodeDepth = 0;
     answerNodeDepth = 0;
+    listLength = 0;
     computeTime = 0;
     solutionCost = 0;
 }

@@ -19,6 +19,7 @@ const expandedNodes = document.getElementById('expandedNodes') as HTMLElement;
 const exploredNodes = document.getElementById('exploredNodes') as HTMLElement;
 const nodeDepth = document.getElementById('nodeDepth') as HTMLElement;
 const answerNodeDepth = document.getElementById('answerNodeDepth') as HTMLElement;
+const listLength = document.getElementById('listLength') as HTMLElement;
 const computeTime = document.getElementById('computeTime') as HTMLElement;
 const solutionCost = document.getElementById('solutionCost') as HTMLElement;
 
@@ -46,12 +47,12 @@ solveButton.addEventListener('click', () => {
                 /* reader.onload = (e) => {
                     fileContent.textContent = e.target?.result as string; // Display the file content
                 }; */
-                //reader.readAsText(file); // changes the bottom text
+                answer=avaraSolver();
+                console.log(`the avara algorithm was used`);
                 break;
 
             case 'aStar':
-                // Display the file size in bytes
-                //fileContent.textContent = `File Size: ${file.size} bytes`;
+                console.log(`the a star algorithm was used`);
                 break;
 
             case 'breadth':
@@ -72,7 +73,7 @@ solveButton.addEventListener('click', () => {
                 fileContent.textContent = 'Please select a valid action.';
                 break;
         }
-        console.log('solveButton listener');
+        console.log('------solveButton listener: this is the answer path reversed');
         console.log(`${answer}`);
         let newAnswer:number[]=[]
         for(let direction of answer){
@@ -97,11 +98,12 @@ solveButton.addEventListener('click', () => {
         statSheet.computeTime=performance.now()- startTime;
         nodeDepth.textContent=statSheet.nodeDepth.toString();
         answerNodeDepth.textContent=statSheet.answerNodeDepth.toString();
+        listLength.textContent=statSheet.listLength.toString();
         expandedNodes.textContent=statSheet.expandedNodes.toString();
         exploredNodes.textContent=statSheet.exploredNodes.toString();
         computeTime.textContent=statSheet.computeTime.toString();
         
-        console.log(answer);
+        //console.log(answer);
         if(newAnswer[0]===-1) {console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNO ANSWER WAS FOUND, I LIED");
             solutionCost.textContent='no solution was found';
             if(!sadTromboneAudio.paused){
@@ -166,6 +168,7 @@ class StatSheet{
     exploredNodes:number=1;
     nodeDepth:number=0;
     answerNodeDepth:number=0;
+    listLength:number=0;
     computeTime:number=0;
     solutionCost:number=0;
 }

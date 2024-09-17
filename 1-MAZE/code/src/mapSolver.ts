@@ -52,6 +52,7 @@ solveButton.addEventListener('click', () => {
                 break;
 
             case 'aStar':
+                answer=aStarSolver();
                 console.log(`the a star algorithm was used`);
                 break;
 

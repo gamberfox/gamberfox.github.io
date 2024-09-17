@@ -44,6 +44,7 @@ solveButton.addEventListener('click', () => {
                 console.log(`the avara algorithm was used`);
                 break;
             case 'aStar':
+                answer = aStarSolver();
                 console.log(`the a star algorithm was used`);
                 break;
             case 'breadth':

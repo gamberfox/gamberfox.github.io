@@ -5,7 +5,7 @@ const avaraSolver = () => {
     let currentNode = new MazePosition(vehiclePosition[0], vehiclePosition[1], VEHICLE, 0, false);
     let queue = [currentNode];
     while (queue.length > 0) {
-        if (statSheet.expandedNodes > (STOP_POINT / 10)) {
+        if (statSheet.expandedNodes > (STOP_POINT / 1)) {
             console.log(`${statSheet.expandedNodes} nodes were searched,
                 the limit has been reached`);
             break;

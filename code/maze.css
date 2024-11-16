@@ -38,8 +38,8 @@ button{
 #grid {
     display: grid;
     /* background-color: aquamarine; */
-    grid-template-columns: repeat(10, 64px);
-    grid-template-rows: repeat(10, 64px);
+    grid-template-columns: repeat(8, 64px);
+    grid-template-rows: repeat(8, 64px);
     background-color: #0011ff;
     border-radius: 5px;
     border: 5px solid green;
@@ -58,18 +58,18 @@ button{
     background-color: white;
 }
 .cell1 {
-    background-color: black;
+    background-color: gray;
 }
 .cell2 {
-    background-color: yellow;
+    background-color: green;
     background-size: 64px 64px;
-    background-image: url('./images/rocket.png');
 }
 .cell3 {
-    background-color: green;
+    background-image: url('./images/rocket.png');
 }
 .cell4 {
     background-color: red;
+    background-image: url('./images/astronaut.png');
 }
 .cell5 {
     background-color: brown;
@@ -108,6 +108,7 @@ button{
 table {
     width: 50%;
     border-collapse: collapse;
+    background-color: aquamarine;
 }
 table, th, td {
     border: 1px solid black;

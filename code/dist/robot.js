@@ -42,7 +42,7 @@ class Robot {
         this.previousX = this.x;
         this.previousY = this.y;
     }
-    moveUp() {
+    moveRightUp() {
         if (this.y > 0) {
             this.y -= 1;
             this.updateGrid();
@@ -51,7 +51,7 @@ class Robot {
             alert("Can't move up, at top boundary.");
         }
     }
-    moveDown() {
+    moveUpRight() {
         if (this.y < this.gridHeight - 1) {
             this.y += 1;
             this.updateGrid();
@@ -60,7 +60,7 @@ class Robot {
             alert("Can't move down, at bottom boundary.");
         }
     }
-    moveLeft() {
+    moveUpLeft() {
         if (this.x > 0) {
             this.x -= 1;
             this.updateGrid();
@@ -69,7 +69,43 @@ class Robot {
             alert("Can't move left, at left boundary.");
         }
     }
-    moveRight() {
+    moveLeftUp() {
+        if (this.x < this.gridWidth - 1) {
+            this.x += 1;
+            this.updateGrid();
+        }
+        else {
+            alert("Can't move right, at right boundary.");
+        }
+    }
+    moveLeftDown() {
+        if (this.x < this.gridWidth - 1) {
+            this.x += 1;
+            this.updateGrid();
+        }
+        else {
+            alert("Can't move right, at right boundary.");
+        }
+    }
+    moveDownLeft() {
+        if (this.x < this.gridWidth - 1) {
+            this.x += 1;
+            this.updateGrid();
+        }
+        else {
+            alert("Can't move right, at right boundary.");
+        }
+    }
+    moveDownRight() {
+        if (this.x < this.gridWidth - 1) {
+            this.x += 1;
+            this.updateGrid();
+        }
+        else {
+            alert("Can't move right, at right boundary.");
+        }
+    }
+    moveRightDown() {
         if (this.x < this.gridWidth - 1) {
             this.x += 1;
             this.updateGrid();
@@ -86,16 +122,28 @@ class Robot {
         for (let direction of listOfMovements) {
             switch (direction) {
                 case 0:
-                    this.moveRight();
+                    this.moveRightUp();
                     break;
                 case 1:
-                    this.moveUp();
+                    this.moveUpRight();
                     break;
                 case 2:
-                    this.moveLeft();
+                    this.moveUpLeft();
                     break;
                 case 3:
-                    this.moveDown();
+                    this.moveLeftUp();
+                    break;
+                case 4:
+                    this.moveLeftDown();
+                    break;
+                case 5:
+                    this.moveDownLeft();
+                    break;
+                case 6:
+                    this.moveDownRight();
+                    break;
+                case 7:
+                    this.moveRightDown();
                     break;
                 default:
                     console.log('there is no answer');
@@ -110,6 +158,5 @@ class Robot {
             joySongAudio.play();
         }
         visualizationIsRunning = false;
-        visualizeButton.disabled = false;
     }
 }

@@ -1,9 +1,15 @@
-"use strict";
-function minimax(board, isMax, level, h) {
+import {movements} from "./t1Board.js";
+export function minimax(board, isMax, level, h) {
     let answer;
     if (level === 0 || board.player1Won || board.player2Won || board.tie) {
-        answer = board.getHeuristic(h);
-        return answer;
+        if (h === 0) {
+            answer = board.getHeuristic1();
+            return answer;
+        }
+        else {
+            answer = board.getHeuristic2();
+            return answer;
+        }
     }
     else {
         if (board.player1Turn)
@@ -37,7 +43,7 @@ function minimax(board, isMax, level, h) {
         return answer;
     }
 }
-function getNextMove(board, level, h) {
+export function getNextMove(board, level, h) {
     let answer = [-1, -1];
     if (level <= 0 || board.player1Won || board.player2Won || board.tie) {
         return answer;

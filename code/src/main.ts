@@ -8,6 +8,8 @@ const difficultyLevel = document.getElementById('difficultyLevel') as HTMLSelect
 const generateButton=document.getElementById('generateButton') as HTMLButtonElement;
 const restartButton = document.getElementById('restartButton') as HTMLButtonElement;
 const beginButton = document.getElementById('beginButton') as HTMLButtonElement;
+//line 155
+const aiButton = document.getElementById('aiButton') as HTMLButtonElement;
 
 
 const mapInfo = document.getElementById('mapInfo') as HTMLPreElement | null;
@@ -38,7 +40,9 @@ for (let i = 0; i < 8; i++) {
                 gameInfo.textContent=`it's the AI's turn, please wait`;
             }
             else{
-                operationInProcess=true;
+                if(operationInProcess){
+                    gameInfo.textContent='please wait for the ai to finish moving';
+                }
                 if(board.player1Won || board.player2Won || board.tie){
                     gameInfo.textContent='the games has ended, you cannot move pieces';
                 }
@@ -46,24 +50,23 @@ for (let i = 0; i < 8; i++) {
                     drawMap();
                     updateInformation();
 
-
-                    /// WE'LL START USING THE MACHINE
-                    if(board.player1Won || board.player2Won || board.tie){
-                        gameInfo.textContent='the game ended';
-                    }
-                    else{
-                        wholeBody.style.backgroundColor = "red";
-                        gameInfo.textContent='the AI is thinking now';
-                        // let aiDecision=getNextMove(board,1,0);
-                        // board.tryToMove(aiDecision);
-                        let nextMove:number[]= getNextMove(board,parseInt(difficultyLevel.value),parseInt(aiAgent.value));
-                        console.log('difficulty and ai: '+difficultyLevel.value+aiAgent.value);
-                        board.tryToMove(nextMove);
-                        wholeBody.style.backgroundColor = "blue";
-                    }
-                    operationInProcess=false;
-                    drawMap();
-                    updateInformation();
+                    /// WE'LL START USING THE AI MACHINE
+                    // if(board.player1Won || board.player2Won || board.tie){
+                    //     gameInfo.textContent='the game ended';
+                    // }
+                    // else{
+                    //     wholeBody.style.backgroundColor = "red";
+                    //     gameInfo.textContent='the AI is thinking now';
+                    //     // let aiDecision=getNextMove(board,1,0);
+                    //     // board.tryToMove(aiDecision);
+                    //     let nextMove:number[]= getNextMove(board,parseInt(difficultyLevel.value),parseInt(aiAgent.value));
+                    //     console.log('difficulty and ai: '+difficultyLevel.value+aiAgent.value);
+                    //     board.tryToMove(nextMove);
+                    //     wholeBody.style.backgroundColor = "blue";
+                    // }
+                    // operationInProcess=false;
+                    // drawMap();
+                    // updateInformation();
                 }
                 else{
                     console.log("movement not doable");
@@ -76,9 +79,6 @@ for (let i = 0; i < 8; i++) {
                     }
                 }
             }
-            /////////////////////////////////////////////////////////
-            //--------------now it's the AI's turn---------------///
-            ///////////////////////////////////////////////////////
         })
 
         /////////////// only use this when testing functionality
@@ -152,6 +152,31 @@ restartButton.addEventListener('click',()=>{
     updateInformation();
 })
 
+aiButton.addEventListener('click',()=>{
+    if(operationInProcess || !board.player1Turn){
+        gameInfo.textContent='the player should move before we make the AI take a decision';
+    }
+    else if(board.player1Won || board.player2Won || board.tie){
+        gameInfo.textContent='the game ended';
+    }
+    else{
+        operationInProcess=true;
+        wholeBody.style.backgroundColor = "red";
+        gameInfo.textContent='the AI is thinking now';
+        // let aiDecision=getNextMove(board,1,0);
+        // board.tryToMove(aiDecision);
+        let nextMove:number[]= getNextMove(board,parseInt(difficultyLevel.value),parseInt(aiAgent.value));
+        console.log('difficulty and ai: '+difficultyLevel.value+aiAgent.value);
+        board.tryToMove(nextMove);
+        wholeBody.style.backgroundColor = "blue";
+        operationInProcess=false;
+        gameInfo.textContent='the AI decided';
+        turnInfo.textContent='human player to move';
+        drawMap();
+        updateInformation();
+    }
+})
+
 let gameStarted:boolean=false;
 beginButton.addEventListener('click',()=>beginFunction());
 
@@ -166,8 +191,10 @@ function beginFunction() {
         gameInfo.textContent='player 2 to move';
         drawMap();
         updateInformation();
+        gameStarted=true;
     }
     else{
+        gameInfo.textContent='the game has started already, click the other button pls';
     }
 }
 

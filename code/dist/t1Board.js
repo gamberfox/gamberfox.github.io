@@ -1,5 +1,4 @@
-"use strict";
-let spaces = [
+export let spaces = [
     [3, 0], [4, 0],
     [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [1, 8], [1, 9], [1, 10],
     [2, 2], [2, 2], [2, 2], [2, 2],
@@ -9,18 +8,18 @@ let spaces = [
     [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0],
     [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
 ];
-let movements = [
+export let movements = [
     [2, 1], [1, 2], [-1, 2], [-2, 1],
     [-2, -1], [-1, -2], [1, -2], [2, -1]
 ];
-const getSpaces = () => {
+export const getSpaces = () => {
     let newSpaces = [];
     for (let x of spaces) {
         newSpaces.push([...x]);
     }
     return newSpaces;
 };
-class Board {
+export class Board {
     player1Turn = true;
     player1Won = false;
     player2Won = false;
@@ -36,26 +35,6 @@ class Board {
     p2Position = [0, 0];
     constructor() {
         this.generateMap();
-    }
-    getHeuristic(utilityFunction) {
-        let h = 0;
-        if (this.player1Won)
-            return 1000 + this.p1Score - this.p2Score;
-        else if (this.player2Won)
-            return -1000 + this.p1Score - this.p2Score;
-        else if (this.tie)
-            return 0;
-        else if (utilityFunction === 0)
-            return this.p1Score - this.p2Score;
-        else {
-            if (this.p1Multiplier === 2)
-                h += 3;
-            if (this.p2Multiplier === 2)
-                h -= 3;
-            h += this.p1Score;
-            h -= this.p2Score;
-            return h;
-        }
     }
     getHeuristic1() {
         let h = 0;

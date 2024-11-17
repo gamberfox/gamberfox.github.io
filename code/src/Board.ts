@@ -48,6 +48,22 @@ class Board {
     constructor(){
         this.generateMap();
     }
+    getHeuristic(utilityFunction:number):number{
+        let h:number=0;
+        // if(this.player1Won)return 1000;
+        if(this.player1Won)return 1000+this.p1Score-this.p2Score;
+        // else if(this.player2Won)return -1000;
+        else if(this.player2Won)return -1000+this.p1Score-this.p2Score;
+        else if(this.tie) return 0;
+        else if(utilityFunction===0) return this.p1Score-this.p2Score;
+        else{
+            if(this.p1Multiplier===2)h+=3;
+            if(this.p2Multiplier===2)h-=3;
+            h+=this.p1Score;
+            h-=this.p2Score;
+            return h;
+        }
+    }
     getHeuristic1():number{
         let h:number=0;
         if(this.player1Won)return 1000;

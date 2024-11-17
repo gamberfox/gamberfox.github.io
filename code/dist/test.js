@@ -9,6 +9,4 @@ let state1 = [
     [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [1, 7], [0, 0], [1, 1]],
     [[0, 0], [2, 2], [0, 0], [0, 0], [0, 0], [0, 0], [2, 2], [1, 3]]
 ];
-let test1 = new Board();
-console.log(test1.getBoardState());
-minimax(board, true, 0, 0);
+let pos1 = [[2, 5], [4, 1]];

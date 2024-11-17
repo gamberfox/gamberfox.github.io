@@ -1,0 +1,19 @@
+#########################################################
+#########################################################
+---------DON'T USE THESE STEPS YET
+#########################################################
+#########################################################
+
+
+npm install --save-dev @types/node
+
+
+
+
+{
+  "compilerOptions": {
+    "module": "CommonJS",       // Use CommonJS module system for Node.js
+    "target": "ES6",            // Or another ES version
+    "types": ["node"]           // Include Node.js types
+  }
+}

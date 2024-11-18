@@ -7,9 +7,9 @@ function minimax(board, isMax, level, h) {
     }
     else {
         if (board.player1Turn)
-            answer = -2000;
+            answer = -1_000_000;
         else
-            answer = 2000;
+            answer = 1_000_000;
         let positionToMove;
         for (let move of movements) {
             let auxBoard = board.clone();
@@ -23,11 +23,15 @@ function minimax(board, isMax, level, h) {
             else if (auxBoard.tryToMove(positionToMove)) {
                 let auxH;
                 if (!auxBoard.player1Turn) {
+                    if (auxBoard.player1Won)
+                        return 1_000_000 + auxBoard.p1Score * 100 - auxBoard.p2Score * 100;
                     auxH = minimax(auxBoard, true, level - 1, h);
                     if (auxH > answer)
                         answer = auxH;
                 }
                 else {
+                    if (auxBoard.player2Won)
+                        return -1_000_000 + auxBoard.p1Score * 100 - auxBoard.p2Score * 100;
                     auxH = minimax(auxBoard, true, level - 1, h);
                     if (auxH < answer)
                         answer = auxH;
@@ -44,9 +48,9 @@ function getNextMove(board, level, h) {
     }
     let heuristic;
     if (board.player1Turn)
-        heuristic = -2000;
+        heuristic = -2_000_000;
     else
-        heuristic = 2000;
+        heuristic = 2_000_000;
     let positionToMove;
     let auxH;
     for (let move of movements) {

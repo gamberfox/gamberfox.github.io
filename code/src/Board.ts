@@ -51,16 +51,167 @@ class Board {
     getHeuristic(utilityFunction:number):number{
         let h:number=0;
         // if(this.player1Won)return 1000;
-        if(this.player1Won)return 1000+this.p1Score-this.p2Score;
+        if(this.player1Won)return 200_000+this.p1Score*100-this.p2Score*100;
         // else if(this.player2Won)return -1000;
-        else if(this.player2Won)return -1000+this.p1Score-this.p2Score;
+        else if(this.player2Won)return -200_000+this.p1Score*100-this.p2Score*100;
         else if(this.tie) return 0;
-        else if(utilityFunction===0) return this.p1Score-this.p2Score;
+        else if(utilityFunction===0){
+            h+=this.p1Score*100;
+            h-=this.p2Score*100;
+            h+=this.p1Multiplier*100;
+            h-=this.p2Multiplier*100;
+            // if(this.player1Turn)h-=1_0000_000;else h+=1_000_000;
+            h+=this.auxH1();
+            return h;
+        }
         else{
-            if(this.p1Multiplier===2)h+=3;
-            if(this.p2Multiplier===2)h-=3;
-            h+=this.p1Score;
-            h-=this.p2Score;
+            //add 1 when the player is the other side, like a radar
+            if(this.p1Multiplier===2)h+=1_000;
+            if(this.p2Multiplier===2)h-=1_000;
+            h+=this.p1Score*1_000;
+            h-=this.p2Score*1_000;
+
+            let pos=this.p1Position;
+            ////////////////////////////////////
+            /////////// we're doing a spiral on player 1
+            let top=pos[0]-7;let bottom=pos[0]+7;
+            let left=pos[1]-7;let right=pos[1]+7;
+            let numberToSum=1;
+            let numberToSumToTheSum=1;
+            let pointWasFound=false;
+            while(top<=bottom && left <=right){
+                for(let col=left;col<=right;col++){
+                    if(col>=0 && col<=7 && top>=0 && top<=7){
+                        if(this.state[top][col][0]===1){
+                            pointWasFound=true;
+                            h+=numberToSum;
+                            // console.log('number to sum'+numberToSum);
+                            break;
+                        }
+                    }
+                }
+                top++;
+                if(pointWasFound) break;
+
+                for (let row = top; row <= bottom; row++) {
+                    if(row>=0 && row<=7 && top>=0 && top<=7){
+                        if(this.state[top][row][0]===1){
+                            pointWasFound=true;
+                            h+=numberToSum;
+                            // console.log('number to sum'+numberToSum);
+                            break;
+                        }
+                    }
+                }
+                right--;
+                if(pointWasFound) break;
+
+                // Fill bottom row
+                if (top <= bottom) {
+                    for (let col = right; col >= left; col--) {
+                        if(col>=0 && col<=7 && bottom>=0 && bottom<=7){
+                            if(this.state[bottom][col][0]===1){
+                                pointWasFound=true;
+                                h+=numberToSum;
+                                // console.log('number to sum'+numberToSum);
+                                break;
+                            }
+                        }
+                    }
+                    bottom--;
+                }
+                if(pointWasFound) break;
+
+                // Fill left column
+                if (left <= right) {
+                    for (let row = bottom; row >= top; row--) {
+                        if(row>=0 && row<=7 && left>=0 && left<=7){
+                            if(this.state[row][left][0]===1){
+                                pointWasFound=true;
+                                h+=numberToSum;
+                                // console.log('number to sum'+numberToSum);
+                                break;
+                            }
+                        }
+                    }
+                    left++;
+                }
+                if(pointWasFound) break;
+                numberToSum+=numberToSumToTheSum;
+                // if(numberToSum>14)break;
+            }
+            //checking if there are point in the adjacent squares
+
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+            ///////////////PART 2 WHERE OPERATE ON THE OTHER PLAYER////////////
+            ///////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////
+            pos=this.p2Position;
+            /////////// we're doing a spiral
+            top=pos[0]-7;bottom=pos[0]+7;
+            left=pos[1]-7;right=pos[1]+7;
+            numberToSum=-numberToSum;
+            numberToSumToTheSum=-numberToSumToTheSum;
+            pointWasFound=false;
+            while(top<=bottom && left <=right){
+                for(let col=left;col<=right;col++){
+                    if(col>=0 && col<=7 && top>=0 && top<=7){
+                        if(this.state[top][col][0]===1){
+                            pointWasFound=true;
+                            h+=numberToSum;
+                            break;
+                        }
+                    }
+                }
+                top++;
+                if(pointWasFound) break;
+
+                for (let row = top; row <= bottom; row++) {
+                    if(row>=0 && row<=7 && top>=0 && top<=7){
+                        if(this.state[top][row][0]===1){
+                            pointWasFound=true;
+                            h+=numberToSum;
+                            break;
+                        }
+                    }
+                }
+                right--;
+                if(pointWasFound) break;
+
+                // Fill bottom row
+                if (top <= bottom) {
+                    for (let col = right; col >= left; col--) {
+                        if(col>=0 && col<=7 && bottom>=0 && bottom<=7){
+                            if(this.state[bottom][col][0]===1){
+                                pointWasFound=true;
+                                h+=numberToSum;
+                                break;
+                            }
+                        }
+                    }
+                    bottom--;
+                }
+                if(pointWasFound) break;
+
+                // Fill left column
+                if (left <= right) {
+                    for (let row = bottom; row >= top; row--) {
+                        if(row>=0 && row<=7 && left>=0 && left<=7){
+                            if(this.state[row][left][0]===1){
+                                pointWasFound=true;
+                                h+=numberToSum;
+                                break;
+                            }
+                        }
+                    }
+                    left++;
+                }
+                if(pointWasFound) break;
+                numberToSum-=numberToSumToTheSum;
+                // if(numberToSum<-14)break;
+            }
+            h+=this.auxH1();
             return h;
         }
     }
@@ -217,5 +368,53 @@ class Board {
         newBoard.p2Position[0]=this.p2Position[0];
         newBoard.p2Position[1]=this.p2Position[1];
         return newBoard;
+    }
+
+    aux1Moves:number[][]=[[0,2],[-2,0],[0,-2],[2,0]];
+    auxH1():number{
+        let h:number=0;
+        let pos:number[];
+        let numberToSum:number=10;
+        for(let move of this.aux1Moves){
+            pos=[this.p1Position[0]+move[0],this.p1Position[1]+move[1]];
+            if(pos[0]>=0 && pos[0]<=7 && pos[1]>=0 && pos[1]<=7){
+                // console.log(pos);
+                if(this.state[pos[0]][pos[1]][0]===1){
+                    h+=numberToSum;
+                    break;
+                }
+            }
+        }
+        for(let move of this.aux1Moves){
+            pos=[this.p2Position[0]+move[0],this.p2Position[1]+move[1]];
+            if(pos[0]>=0 && pos[0]<=7 &&pos[1]>=0 && pos[1]<=7){
+                // console.log(pos);
+                if(this.state[pos[0]][pos[1]][0]===1){
+                    h-=numberToSum;
+                    break;
+                }
+            }
+        }
+        for(let move of movements){
+            pos=[this.p1Position[0]+move[0],this.p1Position[1]+move[1]];
+            if(pos[0]>=0 && pos[0]<=7 && pos[1]>=0 && pos[1]<=7){
+                // console.log(pos);
+                if(this.state[pos[0]][pos[1]][0]===1){
+                    h+=numberToSum*10;
+                    break;
+                }
+            }
+        }
+        for(let move of movements){
+            pos=[this.p2Position[0]+move[0],this.p2Position[1]+move[1]];
+            if(pos[0]>=0 && pos[0]<=7 &&pos[1]>=0 && pos[1]<=7){
+                // console.log(pos);
+                if(this.state[pos[0]][pos[1]][0]===1){
+                    h-=numberToSum*10;
+                    break;
+                }
+            }
+        }
+        return h;
     }
 }

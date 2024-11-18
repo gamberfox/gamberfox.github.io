@@ -33,7 +33,7 @@ button{
     padding: 10px;
     border: 2px solid;
     border-color: blueviolet;
-    margin:5px;
+    margin:2px;
 }
 #grid {
     display: grid;

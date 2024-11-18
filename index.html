@@ -12,40 +12,46 @@
     <audio id="partyHorn" src="./code/sound/partyHorn.mp3"></audio>
     <audio id="sadTrombone" src="./code/sound/sadTrombone.mp3"></audio>
     <div class="top">
-        <h1>AI project 2 by Javier Humberto Grijalba Camayo</h1>
+        <h2>AI project 2 by Javier Humberto Grijalba Camayo</h2>
     </div>
     <div class="panel">
         <!-- File input -->
         <input type="file" id="fileInput" />
 
-        <label for="mapList">choose a map:</label>
+        <!-- <label for="mapList">choose a map:</label>
         <select id="mapList">
             <option value="map1">original example</option>
             <option value="map2">map 2</option>
             <option value="map3">map 3(deep depth)</option>
             <option value="map4">map 4(deeper depth)</option>
             <option value="map5">map 5(weird depth)</option>
-            <option value="map6">map 6: 03breadth.txt</option>
-            <option value="map7">map 7: avara trap</option>
-            <option value="map8">map 8: avara trap 2</option>
-            <option value="map9">map 9: uniformCost vs A*</option>
-            <option value="map10">map 10: empty Map</option>
-            <option value="map11">map 11: empty red Map</option>
+        </select> -->
+        <label for="p1Agent">p1 agent:</label>
+        <select id="p1Agent">
+            <option value="0">agent 1</option>
+            <option value="1">agent 2</option>
         </select>
-        <label for="vehicleSpeed">choose the vehicle speed:</label>
-        <select id="vehicleSpeed">
-            <!-- Default options, will be updated dynamically -->
-            <option value="100">fast</option>
-            <option value="500">normal</option>
-            <option value="1000">slow</option>
+        <label for="p1Speed">p1 level:</label>
+        <select id="p1Speed">
+            <option value="2">easy</option>
+            <option value="4">normal</option>
+            <option value="6">expert</option>
+            <option value="10">skynet</option>
+        </select>
+        <label for="p2Speed">p2 level:</label>
+        <select id="p2Speed">
+            <option value="2">easy</option>
+            <option value="4">normal</option>
+            <option value="6">expert</option>
+            <option value="10">skynet</option>
         </select>
     </div>
     <div class="panel">
         <!-- First panel: Select file type category -->
         <label for="aiAgent">choose an AI opponent:</label>
         <select id="aiAgent">
-            <option value="1">AI 1</option>
-            <option value="2">AI 2</option>
+            <option value="0">AI 1</option>
+            <option value="1">AI 2</option>
         </select>
         <label for="difficultyLevel">Choose a difficulty level:</label>
         <select id="difficultyLevel">
@@ -55,6 +61,7 @@
             <option value="6">expert</option>
             <option value="10">skynet</option>
         </select>
+        <button id="testButton">run test</button>
     </div>
     <div class="panel">
         <!-- Button to perform the selected action -->
@@ -64,12 +71,12 @@
         <button id="beginButton">begin game</button>
         <button id="aiButton">perform AI action</button>
     </div>
-    <pre class="invisible" id="turnInfo">
+    <span class="invisible" id="turnInfo">
         player 1 turn
-    </pre>
-    <pre class="invisible" id="gameInfo">
+    </span>
+    <span class="invisible" id="gameInfo">
         the AI is getting ready
-    </pre>
+    </span>
     <!-- Second panel: Select action (this will change based on the first panel) -->
     <pre id="fileContent"></pre>
 
@@ -128,15 +135,14 @@
         yo this is me \n or something else
     </pre>
     <script src="./code/dist/main.js"></script>
-    <script src="./code/dist/robot.js"></script>
     <script src="./code/dist/mapReader.js"></script>
     <script src="./code/dist/mapSolver.js"></script>
-    <script src="./code/dist/visualizeAnswer.js"></script>
     <script src="./code/dist/mapList.js"></script>
     <script src="./code/dist/settings.js"></script>
     <!-- informed search algorithms -->
     <script src="./code/dist/Board.js"></script>
     <script src="./code/dist/minimax.js"></script>
+    <script src="./code/dist/runTest.js"></script>
     <script src="./code/dist/test.js"></script>
 </body>
 </html>

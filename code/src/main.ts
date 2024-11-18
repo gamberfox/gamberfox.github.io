@@ -1,9 +1,13 @@
 // Get references to the DOM elements
 const fileInput = document.getElementById('fileInput') as HTMLInputElement;
 const fileContent = document.getElementById('fileContent') as HTMLElement;
+const p1Agent = document.getElementById('p1Agent') as HTMLSelectElement;
+const p1Speed = document.getElementById('p1Speed') as HTMLSelectElement;
+const p2Speed = document.getElementById('p2Speed') as HTMLSelectElement;
 
 const aiAgent = document.getElementById('aiAgent') as HTMLSelectElement;
 const difficultyLevel = document.getElementById('difficultyLevel') as HTMLSelectElement;
+const testButton=document.getElementById('testButton') as HTMLButtonElement;
 
 const generateButton=document.getElementById('generateButton') as HTMLButtonElement;
 const restartButton = document.getElementById('restartButton') as HTMLButtonElement;
@@ -71,6 +75,8 @@ for (let i = 0; i < 8; i++) {
                 else{
                     console.log("movement not doable");
                     operationInProcess=false;
+                    drawMap();
+                    updateInformation();
                     if(board.player1Turn){
                         console.log('p1 position: '+ board.p1Position.toString());
                     }
@@ -107,23 +113,18 @@ for (let i = 0; i < 8; i++) {
 const testVar:number=2;
 
 //this is created in mapReader
-let robot:Robot;
 let mapWasCreated:boolean=false;
 let board:Board;
 let initialBoard:Board;
-
-// Listen for changes in the file category (first panel)
-// aiAgent.addEventListener('change', (event) => {
-//     const selectedCategory = (event.target as HTMLSelectElement).value;
-//     updateActionOptions(selectedCategory);
-// });
 
 fileInput.addEventListener('click',()=>{
     mapListWasSelected=false;
 });
 
-let nn1:Board;
-let nn2:Board;
+testButton.addEventListener('click',()=>{
+    runTest(100);
+})
+
 generateButton.addEventListener('click',()=>{
     const selectedAction = difficultyLevel.value; // Get the selected action
     const file = fileInput.files?.[0]; // Get the selected file
@@ -133,15 +134,17 @@ generateButton.addEventListener('click',()=>{
     winner.textContent='no winner yet';
     // the map is drawn in mapReader.ts
     drawMap();
+    updateInformation();
     //it's drawn in mapreader.ts
 
 
-    //this will set the map to test 1
-    // board.state=state1;
-    // board.p1Position=[2,5];
-    // board.p2Position=[4,1];
-    // initialBoard=board.clone();
-    // drawMap();
+    ///////////this will set the map to test 1
+    board.state=state5;
+    board.p1Position=pos5[0];
+    board.p2Position=pos5[1];
+    initialBoard=board.clone();
+    drawMap();
+    updateInformation();
 });
 
 restartButton.addEventListener('click',()=>{
@@ -165,6 +168,7 @@ aiButton.addEventListener('click',()=>{
         gameInfo.textContent='the AI is thinking now';
         // let aiDecision=getNextMove(board,1,0);
         // board.tryToMove(aiDecision);
+        ////////////////////////////////////////////////////////////////////////////
         let nextMove:number[]= getNextMove(board,parseInt(difficultyLevel.value),parseInt(aiAgent.value));
         console.log('difficulty and ai: '+difficultyLevel.value+aiAgent.value);
         board.tryToMove(nextMove);
@@ -174,6 +178,7 @@ aiButton.addEventListener('click',()=>{
         turnInfo.textContent='human player to move';
         drawMap();
         updateInformation();
+        ////////////////////////////////////////////////////////////////////////////
     }
 })
 

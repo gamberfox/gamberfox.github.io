@@ -1,8 +1,12 @@
 "use strict";
 const fileInput = document.getElementById('fileInput');
 const fileContent = document.getElementById('fileContent');
+const p1Agent = document.getElementById('p1Agent');
+const p1Speed = document.getElementById('p1Speed');
+const p2Speed = document.getElementById('p2Speed');
 const aiAgent = document.getElementById('aiAgent');
 const difficultyLevel = document.getElementById('difficultyLevel');
+const testButton = document.getElementById('testButton');
 const generateButton = document.getElementById('generateButton');
 const restartButton = document.getElementById('restartButton');
 const beginButton = document.getElementById('beginButton');
@@ -41,6 +45,8 @@ for (let i = 0; i < 8; i++) {
                 else {
                     console.log("movement not doable");
                     operationInProcess = false;
+                    drawMap();
+                    updateInformation();
                     if (board.player1Turn) {
                         console.log('p1 position: ' + board.p1Position.toString());
                     }
@@ -54,15 +60,15 @@ for (let i = 0; i < 8; i++) {
     }
 }
 const testVar = 2;
-let robot;
 let mapWasCreated = false;
 let board;
 let initialBoard;
 fileInput.addEventListener('click', () => {
     mapListWasSelected = false;
 });
-let nn1;
-let nn2;
+testButton.addEventListener('click', () => {
+    runTest(100);
+});
 generateButton.addEventListener('click', () => {
     const selectedAction = difficultyLevel.value;
     const file = fileInput.files?.[0];
@@ -71,6 +77,13 @@ generateButton.addEventListener('click', () => {
     initialBoard = board.clone();
     winner.textContent = 'no winner yet';
     drawMap();
+    updateInformation();
+    board.state = state5;
+    board.p1Position = pos5[0];
+    board.p2Position = pos5[1];
+    initialBoard = board.clone();
+    drawMap();
+    updateInformation();
 });
 restartButton.addEventListener('click', () => {
     board = initialBoard.clone();

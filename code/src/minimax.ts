@@ -7,8 +7,8 @@ function minimax(board:Board,isMax:boolean,level:number,h:number):number{
     // when we only want 1 level
     // "movements" comes from the 'Board.ts' file
     else{
-        if(board.player1Turn)answer=-2000;
-        else answer=2000;
+        if(board.player1Turn)answer=-1_000_000;
+        else answer=1_000_000;
 
         let positionToMove:number[];
         for(let move of movements){
@@ -22,15 +22,18 @@ function minimax(board:Board,isMax:boolean,level:number,h:number):number{
             if(positionToMove[0]<0 || positionToMove[0]>7 ||positionToMove[1]<0 || positionToMove[1]>7){}
             else if(auxBoard.tryToMove(positionToMove)){
                 let auxH:number;
-                // if(h===0){
-                    if(!auxBoard.player1Turn){
-                        auxH=minimax(auxBoard,true,level-1,h);
-                        if(auxH>answer)answer=auxH;
-                    }
-                    else{
-                        auxH=minimax(auxBoard,true,level-1,h);
-                        if(auxH<answer)answer=auxH;
-                    }
+                //it's the turn of player 2 since we move, but we still need to
+                // find the best option for player 1
+                if(!auxBoard.player1Turn){
+                    if(auxBoard.player1Won)return 1_000_000+auxBoard.p1Score*100-auxBoard.p2Score*100;
+                    auxH=minimax(auxBoard,true,level-1,h);
+                    if(auxH>answer)answer=auxH;
+                }
+                else{
+                    if(auxBoard.player2Won)return -1_000_000+auxBoard.p1Score*100-auxBoard.p2Score*100;
+                    auxH=minimax(auxBoard,true,level-1,h);
+                    if(auxH<answer)answer=auxH;
+                }
             }
         }
         return answer;
@@ -43,8 +46,8 @@ function getNextMove(board:Board,level:number,h:number):number[] {
        return answer; 
     }
     let heuristic:number;
-    if(board.player1Turn)heuristic=-2000;
-    else heuristic=2000;
+    if(board.player1Turn)heuristic=-2_000_000;
+    else heuristic=2_000_000;
     let positionToMove:number[];
     let auxH:number;
     for(let move of movements){

@@ -1,12 +1,11 @@
 
-
 function delay(ms:number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-// async function runTest(aiAgent:number,difficulty:number) {
 async function runTest(timeDelay:number) {
     gameInfo.style.backgroundColor='green';
-    gameInfo.textContent='a test has started';
+    gameInfo.textContent='a simulation has started';
+    if(!mapWasCreated)generateMap();
     let totalMoves:number=0;
     let p1ChosenAgent:number=0;let p2ChosenAgent:number=1;
     if(parseInt(p1Agent.value)===1){
@@ -15,35 +14,30 @@ async function runTest(timeDelay:number) {
     }
     let p1ChosenLevel:number=parseInt(p1Speed.value);
     let p2ChosenLevel:number=parseInt(p2Speed.value);
-    // for(let i=0;i<20;i++){
-    for(let i=0;i<8;i++){
+    for(let i=0;i<20;i++){
+        if(board1.player1Won || board1.player2Won || board1.tie)break;
         operationInProcess=true;
-        if(board.player1Won || board.player2Won || board.tie)break;
-        let nextMove:number[]= getNextMove(board,p1ChosenLevel,p1ChosenAgent);
-        board.tryToMove(nextMove);
+        let nextMove:number[]= getNextMove(board1,p1ChosenLevel,p1ChosenAgent);
+        board1.tryToMove(nextMove);
         operationInProcess=false;
         drawMap();
         updateInformation();
         totalMoves+=1;
-        // gameInfo.textContent='runTest button'+i.toString();
-        // await delay(parseInt(vehicleSpeed.value));
         await delay(timeDelay);
         //////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////
+        if(board1.player1Won || board1.player2Won || board1.tie)break;
         operationInProcess=true;
-        if(board.player1Won || board.player2Won || board.tie)break;
-        nextMove= getNextMove(board,p2ChosenLevel,p2ChosenAgent);
-        board.tryToMove(nextMove);
+        nextMove= getNextMove(board1,p2ChosenLevel,p2ChosenAgent);
+        board1.tryToMove(nextMove);
         operationInProcess=false;
         drawMap();
         updateInformation();
-        // gameInfo.textContent='runTest button'+i.toString();
-        // await delay(parseInt(vehicleSpeed.value));
         await delay(timeDelay);
         console.log('oi');
         totalMoves+=1;
     }
-    console.log('finished with the test');
+    console.log('-------------------------finished with the test-------------------------');
     console.log('total moves: '+totalMoves);
     gameInfo.textContent='the test finished';
 }

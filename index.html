@@ -7,25 +7,30 @@
     <link rel="stylesheet" href="./code/maze.css">
 </head>
 <body id="body">
-    <audio id="nutcracker" src="./code/sound/nutcracker.mp3"></audio>
+    <!-- <audio id="nutcracker" src="./code/sound/nutcracker.mp3"></audio>
     <audio id="joySong" src="./code/sound/joySong.mp3"></audio>
     <audio id="partyHorn" src="./code/sound/partyHorn.mp3"></audio>
-    <audio id="sadTrombone" src="./code/sound/sadTrombone.mp3"></audio>
+    <audio id="sadTrombone" src="./code/sound/sadTrombone.mp3"></audio> -->
     <div class="top">
         <h2>AI project 2 by Javier Humberto Grijalba Camayo</h2>
     </div>
     <div class="panel">
         <!-- File input -->
-        <input type="file" id="fileInput" />
+        <!-- <input type="file" id="fileInput" /> -->
 
         <!-- <label for="mapList">choose a map:</label>
         <select id="mapList">
             <option value="map1">original example</option>
             <option value="map2">map 2</option>
-            <option value="map3">map 3(deep depth)</option>
-            <option value="map4">map 4(deeper depth)</option>
-            <option value="map5">map 5(weird depth)</option>
         </select> -->
+        <label for="movementSpeed">simulation movement delay:</label>
+        <select id="movementSpeed">
+            <!-- Default options, will be updated dynamically -->
+            <option value="1">1</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+            <option value="1000">1000</option>
+        </select>
         <label for="p1Agent">p1 agent:</label>
         <select id="p1Agent">
             <option value="0">agent 1</option>
@@ -45,6 +50,7 @@
             <option value="6">expert</option>
             <option value="10">skynet</option>
         </select>
+        <button id="testButton">run 20 movement simulation</button>
     </div>
     <div class="panel">
         <!-- First panel: Select file type category -->
@@ -61,14 +67,13 @@
             <option value="6">expert</option>
             <option value="10">skynet</option>
         </select>
-        <button id="testButton">run test</button>
     </div>
     <div class="panel">
         <!-- Button to perform the selected action -->
-        <span class="warning">you need to generate the map before playing</span>
+        <span class="warning">you need to generate the map before PLAYING or SIMULATING</span>
         <button id="generateButton">generate map</button>
         <button id="restartButton">restart game</button>
-        <button id="beginButton">begin game</button>
+        <!-- <button id="beginButton">begin game</button> -->
         <button id="aiButton">perform AI action</button>
     </div>
     <span class="invisible" id="turnInfo">
@@ -112,11 +117,11 @@
                         <td id="winner">no winner yet</td>
                     </tr>
                     <tr>
-                        <th>list length(queue/stack):</th>
-                        <td id="listLength"></td>
+                        <th>moves made:</th>
+                        <td id="totalMoves">0</td>
                     </tr>
                     <tr>
-                        <th>compute time in ms:</th>
+                        <th>:</th>
                         <td id="computeTime"></td>
                     </tr>
                     <tr>
@@ -127,17 +132,12 @@
             </table>
         </div>
     </div>
-    <div class="info">
-        <h4 class="solutionInfo">solution info</h1>
-
-    </div>
-    <pre class="invisible" id="mapInfo">
+    <!-- <pre class="invisible" id="mapInfo">
         yo this is me \n or something else
-    </pre>
+    </pre> -->
     <script src="./code/dist/main.js"></script>
     <script src="./code/dist/mapReader.js"></script>
     <script src="./code/dist/mapSolver.js"></script>
-    <script src="./code/dist/mapList.js"></script>
     <script src="./code/dist/settings.js"></script>
     <!-- informed search algorithms -->
     <script src="./code/dist/Board.js"></script>

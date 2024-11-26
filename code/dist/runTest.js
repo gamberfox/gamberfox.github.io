@@ -4,7 +4,9 @@ function delay(ms) {
 }
 async function runTest(timeDelay) {
     gameInfo.style.backgroundColor = 'green';
-    gameInfo.textContent = 'a test has started';
+    gameInfo.textContent = 'a simulation has started';
+    if (!mapWasCreated)
+        generateMap();
     let totalMoves = 0;
     let p1ChosenAgent = 0;
     let p2ChosenAgent = 1;
@@ -14,22 +16,22 @@ async function runTest(timeDelay) {
     }
     let p1ChosenLevel = parseInt(p1Speed.value);
     let p2ChosenLevel = parseInt(p2Speed.value);
-    for (let i = 0; i < 8; i++) {
-        operationInProcess = true;
-        if (board.player1Won || board.player2Won || board.tie)
+    for (let i = 0; i < 20; i++) {
+        if (board1.player1Won || board1.player2Won || board1.tie)
             break;
-        let nextMove = getNextMove(board, p1ChosenLevel, p1ChosenAgent);
-        board.tryToMove(nextMove);
+        operationInProcess = true;
+        let nextMove = getNextMove(board1, p1ChosenLevel, p1ChosenAgent);
+        board1.tryToMove(nextMove);
         operationInProcess = false;
         drawMap();
         updateInformation();
         totalMoves += 1;
         await delay(timeDelay);
-        operationInProcess = true;
-        if (board.player1Won || board.player2Won || board.tie)
+        if (board1.player1Won || board1.player2Won || board1.tie)
             break;
-        nextMove = getNextMove(board, p2ChosenLevel, p2ChosenAgent);
-        board.tryToMove(nextMove);
+        operationInProcess = true;
+        nextMove = getNextMove(board1, p2ChosenLevel, p2ChosenAgent);
+        board1.tryToMove(nextMove);
         operationInProcess = false;
         drawMap();
         updateInformation();
@@ -37,7 +39,7 @@ async function runTest(timeDelay) {
         console.log('oi');
         totalMoves += 1;
     }
-    console.log('finished with the test');
+    console.log('-------------------------finished with the test-------------------------');
     console.log('total moves: ' + totalMoves);
     gameInfo.textContent = 'the test finished';
 }

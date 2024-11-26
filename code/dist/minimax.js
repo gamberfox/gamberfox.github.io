@@ -1,18 +1,17 @@
 "use strict";
-function minimax(board, isMax, level, h) {
+function minimax(boardChosen, isMax, level, h) {
     let answer;
-    if (level === 0 || board.player1Won || board.player2Won || board.tie) {
-        answer = board.getHeuristic(h);
-        return answer;
+    if (level === 0 || boardChosen.player1Won || boardChosen.player2Won || boardChosen.tie) {
+        return boardChosen.getHeuristic(h);
     }
     else {
-        if (board.player1Turn)
-            answer = -1_000_000;
+        if (boardChosen.player1Turn)
+            answer = -2_000_000;
         else
-            answer = 1_000_000;
+            answer = 2_000_000;
         let positionToMove;
         for (let move of movements) {
-            let auxBoard = board.clone();
+            let auxBoard = boardChosen.clone();
             if (auxBoard.player1Turn)
                 positionToMove =
                     [auxBoard.p1Position[0] + move[0], auxBoard.p1Position[1] + move[1]];
@@ -22,39 +21,36 @@ function minimax(board, isMax, level, h) {
             if (positionToMove[0] < 0 || positionToMove[0] > 7 || positionToMove[1] < 0 || positionToMove[1] > 7) { }
             else if (auxBoard.tryToMove(positionToMove)) {
                 let auxH;
+                auxH = minimax(auxBoard, true, level - 1, h);
                 if (!auxBoard.player1Turn) {
-                    if (auxBoard.player1Won)
-                        return 1_000_000 + auxBoard.p1Score * 100 - auxBoard.p2Score * 100;
-                    auxH = minimax(auxBoard, true, level - 1, h);
-                    if (auxH > answer)
+                    if (auxH > answer) {
                         answer = auxH;
+                    }
                 }
                 else {
-                    if (auxBoard.player2Won)
-                        return -1_000_000 + auxBoard.p1Score * 100 - auxBoard.p2Score * 100;
-                    auxH = minimax(auxBoard, true, level - 1, h);
-                    if (auxH < answer)
+                    if (auxH < answer) {
                         answer = auxH;
+                    }
                 }
             }
         }
         return answer;
     }
 }
-function getNextMove(board, level, h) {
+function getNextMove(boardChosen, level, h) {
     let answer = [-1, -1];
-    if (level <= 0 || board.player1Won || board.player2Won || board.tie) {
+    if (level < 0) {
         return answer;
     }
     let heuristic;
-    if (board.player1Turn)
+    if (boardChosen.player1Turn)
         heuristic = -2_000_000;
     else
         heuristic = 2_000_000;
     let positionToMove;
     let auxH;
     for (let move of movements) {
-        let auxBoard = board.clone();
+        let auxBoard = boardChosen.clone();
         if (auxBoard.player1Turn)
             positionToMove =
                 [auxBoard.p1Position[0] + move[0], auxBoard.p1Position[1] + move[1]];
@@ -67,16 +63,17 @@ function getNextMove(board, level, h) {
             if (!auxBoard.player1Turn) {
                 if (auxH > heuristic) {
                     heuristic = auxH;
-                    answer = [...positionToMove];
+                    answer = [positionToMove[0], positionToMove[1]];
                 }
             }
             else {
                 if (auxH < heuristic) {
                     heuristic = auxH;
-                    answer = [...positionToMove];
+                    answer = [positionToMove[0], positionToMove[1]];
                 }
             }
         }
     }
+    console.log('chosen move was ' + answer);
     return answer;
 }

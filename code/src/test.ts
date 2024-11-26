@@ -55,13 +55,97 @@ let state5:number[][][]=[
 ];
 let pos5:number[][]=[[7,2],[2,7]];
 
+let s6:number[][][]=[[
+  [1,9],[0,0],[0,0],[1,8],[0,0],[0,0],[0,0],[0,0],],
+[[0,0],[1,7],[0,0],[0,0],[1,6],[3,0],[0,0],[1,1],],
+[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[1,2],[0,0],],
+[[1,10],[2,2],[0,0],[0,0],[0,0],[0,0],[2,2],[0,0],],
+[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],],
+[[0,0],[1,4],[0,0],[0,0],[0,0],[1,3],[0,0],[0,0],],
+[[0,0],[2,2],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],],
+[[1,5],[0,0],[0,0],[0,0],[0,0],[4,0],[2,2],[0,0],],]
+let pos6:number[][]=[[1,5],[7,5]];
 
 
-// let test1:Board=new Board();
+let s10=[[[1,9],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],],[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[1,1],],[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],],[[0,0],[0,0],[0,0],[4,0],[0,0],[0,0],[2,2],[0,0],],[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],],[[0,0],[3,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],],[[0,0],[2,2],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],],[[1,5],[0,0],[0,0],[0,0],[0,0],[0,0],[2,2],[0,0],],];
+let pos10=[[5,1],[3,3]];
 
-// console.log(test1.getBoardState());
+let b1:Board;
+function projectTest(times:number=1,turnDepth:number=20){
+  console.log(`you're doing a test with ${times} games played`);
+  let player1Agent=parseInt(p1Agent.value);
+  let player1Level=parseInt(p1Speed.value);
+  let player2Agent=(player1Agent===0)?1:0;
+  let player2Level=parseInt(p2Speed.value);
+  console.log(`p1 chosen agent: ${player1Agent+1} | p1 agent level: ${player1Level}`);
+  console.log(`p2 chosen agent: ${player2Agent+1} | p2 agent level: ${player2Level}`);
 
-//the last part of the generateButton function has tests set up
-// minimax(board,true,0,0);
-
-// await this.delay(this.difficulty);
+  let result:number[]=[0,0,0];
+  let totalMoves=0;
+  let gameEnded:boolean=false;
+  let nextMove:number[];
+  for(let currentTest=0;currentTest<times;currentTest++){
+    b1=new Board();
+    board1=b1.clone();
+    drawMap();
+    gameEnded=false;
+    totalMoves=0;
+    for(let i=0;i<turnDepth;i++){
+      // drawMap();
+      if(b1.player1Won || b1.player2Won || b1.tie){
+        gameEnded=true;
+        if(b1.player1Won){
+          result[0]++;
+        }
+        else if(b1.player2Won){
+          result[1]++;
+        }
+        else if(b1.tie){
+          result[2]++;
+        }
+        break;
+      }
+      nextMove= getNextMove(b1,player1Level,player1Agent);
+      // b1.tryToMove(nextMove);
+      console.log(b1.tryToMove(nextMove))
+      operationInProcess=false;
+      // drawMap();
+      // updateInformation();
+      totalMoves+=1;
+      
+      //////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////
+      operationInProcess=true;
+      if(b1.player1Won || b1.player2Won || b1.tie){
+        gameEnded=true;
+        if(b1.player1Won){
+          result[0]++;
+        }
+        else if(b1.player2Won){
+          result[1]++;
+        }
+        else if(b1.tie){
+          result[2]++;
+        }
+        break;
+      }
+      nextMove= getNextMove(b1,player2Level,player2Agent);
+      // b1.tryToMove(nextMove);
+      console.log(b1.tryToMove(nextMove))
+      operationInProcess=false;
+      totalMoves+=1;
+      drawMap();
+      // break;
+    }
+    board1=b1.clone();
+    drawMap();
+    if(!gameEnded){
+      result[2]++;
+    }
+    console.log(`test ${currentTest} finished in ${totalMoves} turns`);
+  }
+  console.log(`p1 chosen agent: ${player1Agent+1} | p1 agent level: ${player1Level}`);
+  console.log(`p2 chosen agent: ${player2Agent+1} | p2 agent level: ${player2Level}`);
+  console.log(`p1 wins: ${result[0]} | p2 wins: ${result[1]} | ties: ${result[2]}`)
+  // return result;
+}

@@ -1,6 +1,6 @@
 
 import {Board,movements} from "./t1Board.js";
-import {getNextMove} from "./t1Minimax.js";
+import {getNextMove, minimax} from "./t1Minimax.js";
 import {s1,p1,s2,p2} from "./t1States.js";
 // import Board from "./t1Board.js";
 let s11 = [
@@ -68,16 +68,17 @@ while(top<=bottom && left <=right){
 }
 
 let rr='[';
-for(let row of board.state){
+for(let row of board1.state){
     let r='[';
     for(let p of row){
         r+=('['+p.toString()+'],');
     }
     r+='],'
-    console.log(r);
+    // console.log(r);
     rr+=r;
 }
 rr+=']';
 console.log(rr);
-console.log(counter);
-console.log(num);
+
+getNextMove(board1,0,0);
+minimax(board1,true,4,0);
